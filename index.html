@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Карта в рамке</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="nav-btn" id="id1">О КАРЕЛИИ</a>
+            <a href="#" class="nav-btn">РАЙОНЫ</a>
+            <a href="#" class="nav-btn">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
+            <a href="#" class="nav-btn">КАРТА</a>
+            <a href="#" class="nav-btn">МАРШРУТЫ</a>
+            <a href="#" class="nav-btn">СОБЫТИЯ</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+     <div class = "travel">
+        <h2 id = "id3"> ВАШЕ ПУТЕШЕСТВИЕ НАЧИНАЕТСЯ ЗДЕСЬ</h2>
+        <h1 id = "id2">КАРЕЛИЯ</h1>
+     </div>
+
+    <div class="content">
+        <h1>Наша интерактивная карта</h1>
+        <p>Исследуйте объекты на нашей карте:</p>
+        
+        <!-- Контейнер для карты с рамкой -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+        
+        <div class="description">
+            <h2>Описание карты</h2>
+            <p>Здесь может быть ваш текст с описанием карты и дополнительной информацией.</p>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
