@@ -22,26 +22,45 @@
     </nav>
 
     <!-- Основной контент -->
-     <div class = "travel">
+    <div class = "travel">
         <h2 id = "id3"> ВАШЕ ПУТЕШЕСТВИЕ НАЧИНАЕТСЯ ЗДЕСЬ</h2>
         <h1 id = "id2">КАРЕЛИЯ</h1>
-     </div>
+        <button id = "id4">Исследовать</button>
+    </div>
+    <div class="background-container"></div>
+    <div class="second-block">
+        <div class="second-block-text">
+            <h2>Добро пожаловать в Карелию — сердце северной природы и истории</h2>
+            <p>Карелия — это один из самых живописных уголков России. Здесь могучие сосны отражаются в кристально чистых озёрах, шумят водопады среди гранитных скал, рассказывая древние легенды. Это земля, где осталась первозданной, история живёт в каждой камне, в каждом деревенском доме, в каждом взгляде на местную природу.</p>
+            <p>Карелия — это музей под открытым небом. Именно здесь находится знаменитый архитектурный ансамбль на острове Кижи — жемчужина русского деревянного зодчества, внесенная в список Всемирного наследия ЮНЕСКО.</p>
+        </div>
+        <div class="left-image">
+            <img src="images/welcome3.jpg">
+        </div>
+        <div class="right-images">
+            <img src="images/welcome2.jpg">
+            <img src="images/welcome1.jpg">
+        </div>
+    </div>
+    <div class="gallery">
+        <img src="gallery1.jpeg" alt="Image 1">
+        <img src="gallery2.jpg" alt="Image 2">
+        <img src="gallery3.jpg" alt="Image 3">
+        <img src="gallery4.jpg" alt="Image 4">
+    </div>
+    
 
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">×</button>
+        <h2 id="sidebar-title"></h2>
+        <p id="sidebar-description"></p>
+    </div>
     <div class="content">
-        <h1>Наша интерактивная карта</h1>
-        <p>Исследуйте объекты на нашей карте:</p>
-        
-        <!-- Контейнер для карты с рамкой -->
         <div class="map-container">
             <div id="map"></div>
         </div>
-        
-        <div class="description">
-            <h2>Описание карты</h2>
-            <p>Здесь может быть ваш текст с описанием карты и дополнительной информацией.</p>
-        </div>
     </div>
-
+    
 <script src="script.js"></script>
 </body>
 </html>

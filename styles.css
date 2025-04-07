@@ -3,10 +3,18 @@ body {
     padding: 0; 
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    background: url('1.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
 
+}
+.background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 950px; /* Высота фона (подбирай под свою верстку) */
+    background: url('2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -1; /* Отправляем его на задний план */
+}
 /* Новая навигационная панель */
 .navbar {
     position: fixed;
@@ -20,8 +28,9 @@ body {
 .nav-content {
     display: flex;
     justify-content: center;
-    max-width: 1200px;
+    max-width: 985px;
     margin: 0 auto;
+    background-color: #60677B;
 }
 
 .nav-btn {
@@ -42,25 +51,43 @@ body {
 }
 
 .nav-btn:hover {
-    background-color: white;
-    color: #60677B;
+    color: #FFB09F;
 }
 
 #id1 {
-    font-weight: bold;
-    font-size: 18px;
+
+    color: #FFB09F;
 }
 
 #id2 {
     color: #DA5538;
     font-size: 80px;
     font-weight: bold;
+    margin-top: 25px;
 }
 #id3 {
     color: white;
     font-size: 26px;
     font-weight: semibold;
     
+}
+#id4 {
+    padding: 20px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px; /* Скругление углов */
+    backdrop-filter: blur(10px); /* Размытие заднего фона */
+    background: rgba(255, 255, 255, 0.2); /* Полупрозрачный фон */
+    transition: all 0.3s ease;
+}
+
+/* Эффект при наведении */
+#id4:hover {
+    background: #60677B;
+    color: #F96D4E;
 }
 /* Адаптивность */
 @media (max-width: 768px) {
@@ -83,9 +110,9 @@ body {
 
 /* Остальные стили */
 .map-container {
-    width: 90%;
-    height: 800px;
-    margin: 20px auto;
+    width: 65%;
+    height: 600px;
+    margin-left: 60px;
     border: 3px solid #333;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     overflow: hidden;
@@ -93,9 +120,11 @@ body {
 .travel {
     text-align: center;
     color: white;
-    margin-top: 256px; /* Добавьте это */
+    margin-top: 256px;
+    margin-bottom: 400px; /* Добавьте это */
     padding: 20px;
     font-family: 'Arial';
+    
     
 }
 #map {
@@ -104,8 +133,7 @@ body {
 }
 
 .content {
-    max-width: 1200px;
-    margin: 100px auto 0;
+    max-width: 1200px;;
     padding: 20px;
 }
 
@@ -125,3 +153,117 @@ body {
     border-radius: 50%;
     cursor: pointer;
 }
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px; /* скрыто за экраном */
+    width: 300px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1001;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1002;
+}
+
+/* второй блок */
+.second-block {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin: 100px auto;
+    margin-left: 400px;
+    max-width: 1200px;
+}
+
+.left-image {
+    width: 35%;
+    align-self: center; /* Центрирование по вертикали */
+}
+.left-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.right-images {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 25%;
+    flex-shrink: 0;
+}
+.right-images img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.second-block-text {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.second-block-text h2 {
+    font-size: 50px;
+    margin-top: 0;
+    font-weight: semibold;
+    color: #3E3F46;
+    font-family: 'Arial';
+}
+.second-block-text p {
+    font-size: 20px;
+    color: #3E3F46;
+    font-family: 'Arial';
+    line-height: 1.5;
+}
+
+/* картинки */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Три колонки */
+    grid-template-rows: auto auto; /* Две строки */
+    gap: 10px; /* Отступы между картинками */
+    max-width: 1200px;
+    margin: auto;
+}
+
+.gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполняем ячейки без искажений */
+}
+
+/* Делаем первую картинку широкой */
+.gallery img:first-child {
+    grid-column: span 2; /* Занимает две колонки */
+    grid-row: span 1; /* Остается в одном ряду */
+}
+
+/* Последняя картинка занимает две колонки */
+.gallery img:last-child {
+    grid-column: span 2;
+}
+
+
