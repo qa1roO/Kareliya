@@ -6,123 +6,55 @@ const map = new mapboxgl.Map({
     zoom: 8
 });
 
-// Данные для маркеров
-const markersData = [
-    {
-        coordinates: [30.579844, 61.948724],
-        image: 'waterfall.png',
-        title: 'Горный парк Рускеала',
-        description: 'Это маркер с кастомной иконкой'
-    },
-    {
-        coordinates: [30.784599, 61.994121],
-        image: 'waterfall.png',
-        title: 'Гора',
-        description: 'Красивый вид на гору'
-    },  
-    {
-        coordinates: [30.627224, 61.916244],
-        image: 'waterfall.png',
-        title: 'Озеро',
-        description: 'Спокойное озеро для отдыха'
-    },
-    {
-        coordinates: [30.699328,61.731724],
-        image: 'waterfall.png',
-        title: 'Озеро',
-        description: 'Спокойное озеро для отдыха'
-    },
-    {
-        coordinates: [30.725691, 61.710167],
-        image: 'waterfall.png',
-        title: 'Озеро',
-        description: 'Спокойное озеро для отдыха'
-    },
-    {
-        coordinates: [30.691946, 61.701118],
-        image: 'waterfall.png',
-        title: 'Озеро',
-        description: 'Спокойное озеро для отдыха'
-    },
-    {
-        coordinates: [ 30.681903, 61.700743],
-        image: 'waterfall.png',
-        title: 'Озеро',
-        description: 'Спокойное озеро для отдыха'
-    },
-    {
-        coordinates: [30.944915, 61.388779],
-        image: 'waterfall.png',
-        title: 'Озеро',
-        description: 'Спокойное озеро для отдыха'
-    },
-    {
-        coordinates: [30.700952, 61.623728],
-        image: 'waterfall.png',
-        title: 'Озеро',
-        description: 'Спокойное озеро для отдыха'
-    }
-];
 
-// Функция для создания маркеров
-markersData.forEach(data => {
-    const el = document.createElement('div');
-    el.className = 'custom-marker';
-    el.style.backgroundImage = `url(${data.image})`;
 
-    // Создаем попап
-    const popup = new mapboxgl.Popup({ 
-        offset: 25, 
-        closeButton: false, 
+// Загружаем данные маркеров из внешнего файла
+fetch('markers.json?' + new Date().getTime())
+  .then(response => {
+    if (!response.ok) throw new Error('Не удалось загрузить markers.json');
+    return response.json();
+  })
+  .then(markersData => {
+    markersData.forEach(data => {
+      // Создаём элемент маркера
+      const el = document.createElement('div');
+      el.className = 'custom-marker';
+      el.style.backgroundImage = `url(${data.image})`;
+
+      // Попап при hover
+      const popup = new mapboxgl.Popup({
+        offset: 25,
+        closeButton: false,
         closeOnClick: false,
         maxWidth: '400px'
-    })
-    .setLngLat(data.coordinates);
+      })
+      .setLngLat(data.coordinates)
+      .setHTML(`<h3>${data.title}</h3><p>${data.description}</p>`);
 
-    const marker = new mapboxgl.Marker(el)
+      // Маркер
+      const marker = new mapboxgl.Marker(el)
         .setLngLat(data.coordinates)
         .addTo(map);
 
-    // Показываем попап при наведении
-    el.addEventListener('mouseenter', () => {
-        popup.addTo(map);
-    });
+      // Hover события
+      el.addEventListener('mouseenter', () => popup.addTo(map));
+      el.addEventListener('mouseleave', () => popup.remove());
 
-    // Убираем попап при уходе курсора
-    el.addEventListener('mouseleave', () => {
-        popup.remove();
+      // Click для сайдбара
+      el.addEventListener('click', () => {
+        document.getElementById('sidebar-title').textContent = data.title;
+        document.getElementById('sidebar-description').textContent = data.description;
+        document.getElementById('sidebar').classList.add('active');
+      });
     });
-});
+  })
+  .catch(err => console.error(err));
 
-// Элементы управления
+// Добавляем контролы
 map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 map.addControl(new mapboxgl.FullscreenControl());
 
-// Функция для открытия карточки
-function openSidebar(title, description) {
-    document.getElementById('sidebar-title').textContent = title;
-    document.getElementById('sidebar-description').textContent = description;
-    document.getElementById('sidebar').classList.add('active');
-}
-
-// Функция для закрытия карточки
+// Функции сайдбара
 function closeSidebar() {
-    document.getElementById('sidebar').classList.remove('active');
+  document.getElementById('sidebar').classList.remove('active');
 }
-
-// Создаем маркеры
-markersData.forEach(data => {
-    const el = document.createElement('div');
-    el.className = 'custom-marker';
-    el.style.backgroundImage = `url(${data.image})`;
-
-    const marker = new mapboxgl.Marker(el)
-        .setLngLat(data.coordinates)
-        .addTo(map);
-
-    // Открываем карточку при клике
-    el.addEventListener('click', () => {
-        openSidebar(data.title, data.description);
-    });
-});
-
