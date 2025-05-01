@@ -16,18 +16,24 @@
     <nav class="navbar">
         <div class="nav-content">
             <a href="index.html" class="nav-btn" id="id1">О КАРЕЛИИ</a>
-            <a href="districts.html" class="nav-btn">КАРТА</a>
-            <a href="#" class="nav-btn">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
+            <a href="map_2.html" class="nav-btn">КАРТА</a>
+            <a href="poi.html" class="nav-btn">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
             <a href="#" class="nav-btn">МАРШРУТЫ</a>
             <a href="#" class="nav-btn">СОБЫТИЯ</a>
         </div>
     </nav>
 
     <!-- Основной контент -->
-    <div class = "travel">
-        <h2 id = "id3"> ВАШЕ ПУТЕШЕСТВИЕ НАЧИНАЕТСЯ ЗДЕСЬ</h2>
-        <h1 id = "id2">КАРЕЛИЯ</h1>
-        <button id = "id4">Исследовать</button>
+    <div class="travel">
+        <div class="travel-left">
+            <h1>КАРЕЛИЯ</h1>
+            <h3>Исследуйте каждый уголок</h3>
+            <h3>русского Севера</h3>
+          <button id="id4">Исследовать</button>
+        </div>
+        <div class="travel-right">
+          <img src="images/starter_border.png" alt="Природа Карелии">
+        </div>
     </div>
     <div class="background-container"></div>
     <div class="second-block">
@@ -52,34 +58,46 @@
     </div>
     
 
-    <div id="sidebar" class="sidebar">
+    <!-- <div id="sidebar" class="sidebar">
         <button class="close-btn" onclick="closeSidebar()">×</button>
         <h2 id="sidebar-title"></h2>
         <p id="sidebar-description"></p>
-    </div>
+    </div> -->
+    <div class="btw"> жемчужина севера: карта карелии</div>
     <div class="third">
-        <div class="third-block-description">
-            <h2>Сортавальский район</h2>
-            <p>Добро пожаловать в Сортавальский район – удивительный край, где величественная природа Карелии
-                встречается с богатой историей и культурой! Расположенный на берегу Ладожского озера, 
-                этот регион славится живописными ландшафтами, чистыми озерами,
-                гранитными скалами и уникальными достопримечательностями.</p>
-            
-            <!-- Добавленные картинки -->
-            <div class="description-images">
-                <img src="images/ruskeala1.jpg" alt="Сортавала 1">
-                <img src="images/passo.jpg" alt="Сортавала 2">
+        <div class="third-content">
+            <div class="third-column left-column">
+                <div class="column-title">РАЙОНЫ</div>
+                <!-- 18 кнопок -->
+                <button class="place-btn">Беломорский</button>
+                <button class="place-btn">Калевальский</button>
+                <button class="place-btn">Кемский</button>
+                <button class="place-btn">Кондопожский</button>
+                <button class="place-btn">Лахденпохский</button>
+                <button class="place-btn">Лоухский</button>
+                <button class="place-btn">Медвежьегорский</button>
+                <button class="place-btn">Муезерский</button>
+                <button class="place-btn">Олонецкий</button>
+                <button class="place-btn">Питкярантский</button>
+                <button class="place-btn">Прионежский</button>
+                <button class="place-btn">Пряжинский</button>
+                <button class="place-btn">Пудожский</button>
+                <button class="place-btn">Сегежский</button>
+                <button class="place-btn">Сортавальский</button>
+                <button class="place-btn">Суоярвский</button>
+                <button class="place-btn">Петрозаводский ГО</button>
+                <button class="place-btn">Костомукшский ГО</button>
+                
             </div>
-            <p> </p>
+            <div class="third-column map-column">
+                <div id="map" style="width: 100%; height: 700px;"></div>
+            </div>
+            <div class="third-column right-column">
+                <h2>Название</h2>
+                <p>Республика Карелия – уникальный регион на северо-западе России, где природа, история и культура образуют гармоничное единство, привлекающее туристов и исследователей. Расположенная между Финляндией, Белым морем и Ладожским и Онежским озерами, Карелия славится своими бескрайними лесами, чистейшими водоемами и богатым культурным наследием. Климат здесь умеренно-континентальный, с мягкой зимой и прохладным летом, что создает благоприятные условия для круглогодичного туризма.  </p>
+            </div>
         </div>
         
-        <div class="third-block-map">
-            <div class="content">
-                <div class="map-container">
-                    <div id="map"></div>
-                </div>
-            </div>
-        </div>
     </div>
     
     

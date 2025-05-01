@@ -2,7 +2,7 @@ body {
     margin: 0; 
     padding: 0; 
     min-height: 100vh;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
 
 }
 .background-container {
@@ -11,7 +11,7 @@ body {
     left: 0;
     width: 100%;
     height: 950px; /* Высота фона (подбирай под свою верстку) */
-    background: url('2.jpg') no-repeat center center fixed;
+    background: url('images/starter.jpg') no-repeat center center fixed;
     background-size: cover;
     z-index: -1; /* Отправляем его на задний план */
 }
@@ -59,24 +59,14 @@ body {
     color: #FFB09F;
 }
 
-#id2 {
-    color: #DA5538;
-    font-size: 80px;
-    font-weight: bold;
-    margin-top: 25px;
-}
-#id3 {
-    color: white;
-    font-size: 26px;
-    font-weight: semibold;
-    
-}
 #id4 {
     padding: 20px 40px;
+    margin-top: 40px;
+    width: 40%;
+    height: 10%;
     font-size: 24px;
     font-weight: bold;
     color: white;
-    border: none;
     cursor: pointer;
     border-radius: 25px; /* Скругление углов */
     backdrop-filter: blur(10px); /* Размытие заднего фона */
@@ -107,26 +97,66 @@ body {
         border-left: 1px solid white;
     }
 }
-
-/* Остальные стили */
-.map-container {
-    width: 87%;
-    height: 600px;
-    border: 3px solid #333;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    overflow: hidden;
-}
+/* старт */
 .travel {
-    text-align: center;
+    display: flex;
+    height: 750px;               /* или сколько вам нужно */
+    max-width: 1700px;
+    margin: 100px auto;          /* отступ сверху/снизу и центр по горизонтали */
+    border-radius: 10px;
+    overflow: hidden;
     color: white;
-    margin-top: 256px;
-    margin-bottom: 400px; /* Добавьте это */
-    padding: 20px;
-    font-family: 'Arial';
-    
-    
+    font-family: 'Roboto', sans-serif;
 }
-
+  
+  /* Левая колонка: центрируем весь контент по вертикали и выравниваем влево */
+  .travel-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* вместо center */
+    padding: 60px 40px 0;         /* регулируем смещение сверху */
+  }
+  
+  
+.travel-left h1 {
+    font-size: 150px;
+    margin: 220px 0 0;
+}
+  
+.travel-left h3 {
+    font-size: 35px;
+    margin: 0 0 5px;
+    font-weight: semibold;
+}
+  
+.travel-left button {
+    padding: 16px 32px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    background: #60677B;
+    color: white;
+    cursor: pointer;
+}
+  
+  /* Правая колонка: картинка на весь блок */
+.travel-right {
+    flex: 1;
+    position: relative;
+}
+  
+.travel-right img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+  
+/* че? */
 #map {
     width: 100%;
     height: 100%;
@@ -154,22 +184,6 @@ body {
     cursor: pointer;
 }
 
-.sidebar {
-    position: fixed;
-    top: 0;
-    right: -400px; /* скрыто за экраном */
-    width: 300px;
-    height: 100%;
-    background: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    transition: right 0.3s ease;
-    z-index: 1001;
-}
-
-.sidebar.active {
-    right: 0;
-}
 
 .close-btn {
     background: none;
@@ -188,15 +202,12 @@ body {
     justify-content: center;
     align-items: flex-start;
     gap: 40px;
-    margin: 100px auto;
-    margin-left: 400px;
+    margin: 100px auto; /* Убрал margin-left */
     max-width: 1200px;
-
     background-image: url('images/russiabg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
 }
 
 .left-image {
@@ -236,12 +247,12 @@ body {
     margin-top: 0;
     font-weight: semibold;
     color: #3E3F46;
-    font-family: 'Arial';
+    font-family: 'Roboto', sans-serif;
 }
 .second-block-text p {
     font-size: 20px;
     color: #3E3F46;
-    font-family: 'Arial';
+    font-family: 'Roboto', sans-serif;
     line-height: 1.5;
 }
 
@@ -253,6 +264,7 @@ body {
     gap: 10px; /* Отступы между картинками */
     max-width: 1200px;
     margin: auto;
+    padding: 10px;
 }
 
 .gallery img {
@@ -273,59 +285,97 @@ body {
 }
 
 
+/* btw */
+
+.btw {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    margin: 0 115px;
+    margin-top: 100px;
+    text-transform: uppercase;
+    color: #24262D;
+}
 /* третий блок */
 .third {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
-    padding: 60px;
-    max-width: 1400px;
-    margin: 0 auto;
+    padding: 20px;
+    max-width: 1700px;
+    margin: 0 auto 0;
 }
 
-.third-block-description {
+.third-content {
+    display: flex;
+    gap: 20px;
+}
+
+.third-column {
     flex: 1;
-    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Отступ между текстом и картинками */
+    align-items: stretch; /* вместо center */
+  }
+  
+
+.left-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto repeat(9, 1fr);
+    gap: 10px;
+    height: 700px;  /* дублирует height карты */
 }
 
-.third-block-map {
-    flex: 1;
-    min-height: 500px;
-    background-color: #f0f0f0;
+.place-btn {
+    height: 70%;
+    width: 90%;
+    padding: 12px;
+    background-color: #60677B; /* светло-серый цвет */
+    color: white;
+    border: none;
     border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;   /* кнопка центрируется в своей ячейке */
+    transition: background-color 0.3s;
 }
 
-/* Стили для добавленных картинок */
-.description-images {
+.place-btn:hover {
+    background-color: #8c8c8c; /* темнее при наведении */
+}
+
+.map-column {
     display: flex;
-    gap: 20px; /* Отступ между картинками */
+    justify-content: center;
+    align-items: center;
 }
 
-.description-images img {
-    width: 50%; /* Каждая картинка занимает половину ширины блока */
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
+.right-column {
+    text-align: left;
+    color: white;
+    background-color: #60677B;
+    font-family: 'Roboto';
+    border-radius: 25px;
 }
 
-/* Стили текста */
-.third-block-description h2 {
-    font-size: 50px;
-    margin: 0;
-    font-weight: bold;
-    color: #3E3F46;
-    font-family: 'Roboto', sans-serif;
-}
-
-.third-block-description p {
+.right-column p {
     font-size: 20px;
-    margin: 0;
-    color: #3E3F46;
-    font-family: 'Roboto', sans-serif;
+    padding: 30px;
     line-height: 1.5;
-    margin-bottom: 0; /* Убираем отступ снизу, чтобы gap работал */
+    margin-top: 0;
+}
+.right-column h2 {
+    margin-bottom: 0;
+    text-align: center;
+}
+.column-title {
+    grid-column: 1 / -1;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    font-weight: bold;
+    color: #24262D;
+    /* margin-top убрать: теперь строка auto-высоты подхватит текст */
 }

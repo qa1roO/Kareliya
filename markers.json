@@ -1,56 +1,65 @@
 [
-    {
-        "coordinates": [30.579844, 61.948724],
-        "image": "waterfall.png",
-        "title": "Горный парк Рускеала",
-        "description": "Это маркер с кастомной иконкой"
-    },
-    {
-        "coordinates": [30.784599, 61.994121],
-        "image": "waterfall.png",
-        "title": "Гора",
-        "description": "Красивый вид на гору"
-    },
-    {
-        "coordinates": [30.627224, 61.916244],
-        "image": "waterfall.png",
-        "title": "Озеро",
-        "description": "Спокойное озеро для отдыха"
-    },
-    {
-        "coordinates": [30.699328, 61.731724],
-        "image": "waterfall.png",
-        "title": "Озеро",
-        "description": "Спокойное озеро для отдыха"
-    },
-    {
-        "coordinates": [30.725691, 61.710167],
-        "image": "waterfall.png",
-        "title": "Озеро",
-        "description": "Спокойное озеро для отдыха"
-    },
-    {
-        "coordinates": [30.691946, 61.701118],
-        "image": "waterfall.png",
-        "title": "Озеро",
-        "description": "Спокойное озеро для отдыха"
-    },
-    {
-        "coordinates": [30.681903, 61.700743],
-        "image": "waterfall.png",
-        "title": "Озеро",
-        "description": "Спокойное озеро для отдыха"
-    },
-    {
-        "coordinates": [30.944915, 61.388779],
-        "image": "waterfall.png",
-        "title": "Озеро",
-        "description": "Спокойное озеро для отдыха"
-    },
-    {
-        "coordinates": [30.700952, 61.623728],
-        "image": "waterfall.png",
-        "title": "Озеро",
-        "description": "Спокойное озеро для отдыха"
-    }
+  {
+    "coordinates": [30.579844, 61.948724],
+    "image": "waterfall.png",
+    "title": "Горный парк Рускеала",
+    "description": "Основанный в 2005 году, парк сохраняет память о 300-летней истории добычи рускеальского мрамора, который использовался при строительстве Исаакиевского собора, станций Петербургского метро и других знаковых объектов.",
+    "images": ["images/Ruskeala1.jpg", "images/Ruskeala2.jpg"]
+  },
+  {
+    "coordinates": [30.784599, 61.994121],
+    "image": "waterfall.png",
+    "title": "Карельский зоопарк",
+    "description": "Крупнейший по площади зоопарк в Северо-Западном регионе России находится в Республике Карелия",
+    "images": ["images/zoo1.jpg", "images/zoo2.jpg"]
+  },
+  {
+    "coordinates": [30.627224, 61.916244],
+    "image": "waterfall.png",
+    "title": "Водопад Ахвенкоски",
+    "description": "Водопад Ахвенкоски на реке Тохмайоки",
+    "images": ["images/aaa.jpg", "images/waterfallAhven2.jpg"]
+  },
+  {
+    "coordinates": [30.699328, 61.731724],
+    "image": "waterfall.png",
+    "title": "Гора Паасо",
+    "description": "Гора Паасо — скалистый холм неподалеку от города Сортавала",
+    "images": ["images/Paaso1.jpg", "images/Paaso2.jpg"]
+  },
+  {
+    "coordinates": [30.725691, 61.710167],
+    "image": "waterfall.png",
+    "title": "Бастионъ",
+    "description": "Исторический парк «Бастіо́нъ» — комплекс музеев живой истории в г.Сортавала",
+    "images": ["images/Bastion1.jpg", "images/Bastion2.jpg"]
+  },
+  {
+    "coordinates": [30.691946, 61.701118],
+    "image": "waterfall.png",
+    "title": "Музей частной коллекции Кронида Гоголева",
+    "description": "Музей частной коллекции Кронида Гоголева — это место, где можно увидеть уникальные резные картины из дерева, созданные самим художником.",
+    "images": ["images/Gogolev1.jpg", "images/Gogolev2.jpg"]
+  },
+  {
+    "coordinates": [30.681903, 61.700743],
+    "image": "waterfall.png",
+    "title": "Музей Северного Приладожья",
+    "description": "Региональный музей Северного Приладожья — это небольшой, но очень насыщенный музей, расположенный в старинном доме. Он предлагает посетителям экскурсию, которая длится около полутора часов и рассказывает об истории Карельского перешейка и города Сортавала.",
+    "images": ["images/SeverPriladog1.jpg", "images/SeverPriladog2.jpg"]
+  },
+  {
+    "coordinates": [30.944915, 61.388779],
+    "image": "waterfall.png",
+    "title": "Валаамский Ставропигиальный мужской монастырь",
+    "description": "Ставропигиальный мужской монастырь Русской православной церкви, расположенный на островах Валаамского архипелага на территории России в Республике Карелия",
+    "images": ["images/ValaamMonast1.jpg", "images/ValaamMonast2.jpg"]
+  },
+  {
+    "coordinates": [30.700952, 61.623728],
+    "image": "waterfall.png",
+    "title": "Ладожские Шхеры",
+    "description": "Национальный парк Ладожские Шхеры",
+    "images": ["images/LadogaShera1.jpg", "images/LadogaShera2.jpg"]
+  }
 ]

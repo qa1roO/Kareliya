@@ -1,0 +1,167 @@
+body { 
+    margin: 0; 
+    padding: 0; 
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* навигациионная панель */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px 0;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: center;
+    max-width: 985px;
+    margin: 0 auto;
+    background-color: #60677B;
+}
+
+.nav-btn {
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    white-space: nowrap;
+    border: 1px solid white;
+    border-left: none;
+    background-color: transparent;
+    position: relative;
+}
+
+.nav-btn:first-child {
+    border-left: 1px solid white;
+}
+
+.nav-btn:hover {
+    color: #FFB09F;
+}
+
+
+/* карта */
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    max-width: 1200px;;
+    padding: 20px;
+}
+.map-container {
+    width: 87%;
+    height: 750px;   /* высота как у вас */
+    overflow: hidden;
+}
+
+
+/* блок */
+/* третий блок */
+.third {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;   /* <-- обратно flex-start */
+    gap: 50px;
+    padding: 60px;
+    max-width: 1400px;
+    margin-top: 20px;
+}
+
+.third-block-description {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 0;
+    min-height: 750px;
+    display: flex;
+    flex-direction: column;
+}
+
+.third-block-map {
+    flex: 1;
+    min-height: 500px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+/* Стили для добавленных картинок */
+.description-images {
+    margin-top: auto;
+    display: flex;
+    gap: 20px; /* Отступ между картинками */
+}
+
+.description-images img {
+    width: 50%; /* Каждая картинка занимает половину ширины блока */
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.third-block-description {
+  /* задаём ту же высоту, что и у .map-container */
+  min-height: 750px;
+  padding: 20px 0;
+  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* Стили текста */
+.third-block-description h2 {
+    font-size: 50px;
+    margin: 0;
+    font-weight: bold;
+    color: #3E3F46;
+    font-family: 'Roboto', sans-serif;
+}
+
+.third-block-description p {
+    font-size: 20px;
+    margin: 0;
+    color: #3E3F46;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+    margin-bottom: 0; 
+}
+
+.custom-marker {
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+  
+.third-block-description {
+    position: relative;
+}
+.description-images {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 90%;
+    display: flex;
+    gap: 20px;
+}
+
+
+/* анимации */
+/* Общий переход для описания и контейнера с картинками */
+#dynamic-description,
+.description-images {
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+/* Класс, который будет «прятать» элемент */
+.fade-out {
+  opacity: 0;
+}

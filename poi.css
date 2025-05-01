@@ -1,0 +1,200 @@
+body { 
+    margin: 0; 
+    padding: 0; 
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+
+}
+.background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 950px; /* Высота фона (подбирай под свою верстку) */
+    background: url('images/starter.jpg') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -1; /* Отправляем его на задний план */
+}
+/* Новая навигационная панель */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px 0;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: center;
+    max-width: 985px;
+    margin: 0 auto;
+    background-color: #60677B;
+}
+
+.nav-btn {
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    white-space: nowrap;
+    border: 1px solid white;
+    border-left: none;
+    background-color: transparent;
+    position: relative;
+}
+
+.nav-btn:first-child {
+    border-left: 1px solid white;
+}
+
+.nav-btn:hover {
+    color: #FFB09F;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .nav-content {
+        flex-wrap: wrap;
+    }
+    
+    .nav-btn {
+        flex: 1 1 auto;
+        text-align: center;
+        padding: 10px 15px;
+        font-size: 14px;
+        border-top: none;
+    }
+
+    .nav-btn:first-child {
+        border-left: 1px solid white;
+    }
+}
+/* старт */
+.travel {
+    display: flex;
+    height: 750px;               /* или сколько вам нужно */
+    max-width: 1700px;
+    margin: 100px auto;          /* отступ сверху/снизу и центр по горизонтали */
+    border-radius: 10px;
+    overflow: hidden;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+  
+  /* Левая колонка: центрируем весь контент по вертикали и выравниваем влево */
+  .travel-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* вместо center */
+    padding: 60px 40px 0;         /* регулируем смещение сверху */
+  }
+  
+  
+.travel-left h1 {
+    font-size: 150px;
+    margin: 220px 0 0;
+}
+  
+.travel-left h3 {
+    font-size: 35px;
+    margin: 0 0 5px;
+    font-weight: semibold;
+}
+  
+  /* Правая колонка: картинка на весь блок */
+.travel-right {
+    flex: 1;
+    position: relative;
+}
+  
+.travel-right img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* второй блок */
+
+/* общий контейнер */
+.poi-section {
+    display: flex;
+    max-width: 100%;
+    margin: 50px auto;
+    gap: 20px;
+}
+  
+  /* Левая колонка: 1/4 ширины */
+.poi-sidebar {
+    flex: 1; /* будет 1 доля */
+    max-width: 25%;
+    background-color: #60677B;
+}
+.poi-sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-align: center;
+}
+.poi-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+.place-btn {
+    padding: 10px;
+    background: #60677B;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.place-btn:hover {
+    background: #505467;
+}
+  
+  /* Правая колонка: 3/4 ширины */
+.poi-main {
+    flex: 3; /* будет 3 доли */
+}
+.poi-main h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+  
+  /* Каждый пункт: текст слева, картинка справа */
+.poi-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+    .poi-text {
+    flex: 1;
+}
+.poi-text h3 {
+    margin: 0 0 10px;
+    font-size: 24px;
+}
+.poi-text p {
+    margin: 0;
+    line-height: 1.4;
+}
+.poi-image {
+    width: 200px;  /* подберите под ваши картинки */
+    flex-shrink: 0;
+}
+.poi-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+  

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Карта в рамке</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+    <link href="poi.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">  
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="nav-btn" id="id1">О КАРЕЛИИ</a>
+            <a href="map_2.html" class="nav-btn">КАРТА</a>
+            <a href="poi.html" class="nav-btn">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
+            <a href="#" class="nav-btn">МАРШРУТЫ</a>
+            <a href="#" class="nav-btn">СОБЫТИЯ</a>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <div class="travel">
+        <div class="travel-left">
+            <h1>КАРЕЛИЯ</h1>
+            <h3>Достопримечательности региона</h3>
+        </div>
+        <div class="travel-right">
+          <img src="images/starter_border.png" alt="Природа Карелии">
+        </div>
+    </div>
+    <div class="background-container"></div>
+    <section class="poi-section">
+        <!-- Левая колонка 1/4 -->
+        <div class="poi-sidebar">
+          <h2>Районы</h2>
+          <div class="poi-buttons">
+            <button class="place-btn">Беломорский</button>
+            <button class="place-btn">Калевальский</button>
+            <button class="place-btn">Кемский</button>
+            <button class="place-btn">Кондопожский</button>
+            <button class="place-btn">Лахденпохский</button>
+            <button class="place-btn">Лоухский</button>
+            <button class="place-btn">Медвежьегорский</button>
+            <button class="place-btn">Муезерский</button>
+            <button class="place-btn">Олонецкий</button>
+            <button class="place-btn">Питкярантский</button>
+            <button class="place-btn">Прионежский</button>
+            <button class="place-btn">Пряжинский</button>
+            <button class="place-btn">Пудожский</button>
+            <button class="place-btn">Сегежский</button>
+            <button class="place-btn">Сортавальский</button>
+            <button class="place-btn">Суоярвский</button>
+            <button class="place-btn">Петрозаводский ГО</button>
+            <button class="place-btn">Костомукшский ГО</button>
+          </div>
+        </div>
+    
+        <!-- Правая колонка 3/4 -->
+        <div class="poi-main">
+          <h2>Достопримечательности</h2>
+          
+          <div class="poi-item">
+            <div class="poi-image">
+                <img src="images/ruskeala1.jpg" alt="">
+            </div>
+            <div class="poi-text">
+              <h3>Горный парк «Рускеала»</h3>
+              <p>уникальный Горный парк «Рускеала» – удивительное место, где переплелись история горного дела, суровая красота северной природы и современные туристические возможности. Этот масштабный комплекс на месте старинных мраморных карьеров стал одной из самых посещаемых достопримечательностей региона, предлагая гостям незабываемые впечатления в любое время года.
+                Основанный в 2005 году, парк сохраняет память о 300-летней истории добычи рускеальского мрамора, который использовался при строительстве Исаакиевского собора, станций Петербургского метро и других знаковых объектов. Информационные стенбы и экспозиции подробно рассказывают о технологии добычи и применении карельского камня.
+                </p>
+            </div>
+
+          </div>
+    
+          <div class="poi-item">
+            <div class="poi-image">
+                <img src="images/Gogolev1.jpg" alt="">
+            </div>
+            <div class="poi-text">
+              <h3>Городище Паасо: древняя крепость среди карельских скал</h3>
+              <p>Всего в 5 км от города Сортавала находится уникальный исторический памятник — городище Паасо, представляющее собой остатки древнего укрепленного поселения. Этот археологический комплекс на вершине гранитной скалы открывает не только страницы средневековой истории Карелии, но и потрясающие панорамы окрестных лесов и озер.
+                Городище Паасо — это редкая возможность прикоснуться к эпохе средневековой Карелии, когда жизнь и безопасность людей зависели от неприступности скал. Сочетание богатой истории и великолепных природных видов делает это место обязательным пунктом для ценителей древностей и красивых панорам.
+                </p>
+            </div>
+
+          </div>
+    
+          <div class="poi-item">
+            <div class="poi-image">
+                <img src="images/Ruskeala1.jpg" alt="">
+            </div>
+            <div class="poi-text">
+              <h3>Валаамский Ставропигиальный мужской монастырь: духовная жемчужина Русского Севера</h3>
+              <p>В сердце Ладожского озера, на живописных островах Валаамского архипелага, расположен один из самых известных православных монастырей России — Валаамский ставропигиальный мужской монастырь. Это место, где суровая северная природа гармонично сочетается с многовековой духовной традицией, создавая уникальную атмосферу умиротворения и благодати.
+                Валаам — это не просто туристическое направление, а место, где каждый может прикоснуться к многовековой духовной традиции, насладиться удивительной природой и на время отрешиться от суеты современного мира.
+                </p>
+            </div>
+
+          </div>
+        </div>
+    </section>
+</body>
