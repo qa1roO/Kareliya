@@ -17,8 +17,8 @@ fetch('markers.json?' + Date.now())
       // 1) создаём DOM-элемент и маркер
       const el = document.createElement('div');
       el.className = 'custom-marker';
-      el.style.width  = '40px';
-      el.style.height = '40px';
+      el.style.width  = '45px';
+      el.style.height = '45px';
       el.style.backgroundImage = `url(${m.image})`;
       el.style.backgroundSize  = 'contain';
       
@@ -71,6 +71,68 @@ fetch('markers.json?' + Date.now())
     });
   })
   .catch(err => console.error(err));
+// Загружаем GeoJSON-полигон
+map.on('load', () => {
+  fetch('geojs/LADOGA_PARK.geojson?' + Date.now())
+    .then(res => res.json())
+    .then(data => {
+      // Добавляем geojson как источник
+      map.addSource('ladoga-park', {
+        type: 'geojson',
+        data: data
+      });
+
+      // Добавляем слой полигона
+      map.addLayer({
+        id: 'ladoga-park-fill',
+        type: 'fill',
+        source: 'ladoga-park',
+        layout: {},
+        paint: {
+          'fill-color': '#088', // цвет полигона
+          'fill-opacity': 0.4
+        }
+      });
+
+      map.addLayer({
+        id: 'ladoga-park-highlight',
+        type: 'fill',
+        source: 'ladoga-park',
+        paint: {
+          'fill-color': '#0ff',
+          'fill-opacity': 0.6
+        },
+        filter: ['==', ['get', 'full_id'], ''] // сначала вообще ничего показываем
+      });
+
+      // popup при наведении
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
+
+      let hoveredId = null;
+
+      map.on('mousemove', 'ladoga-park-fill', (e) => {
+        const fid = e.features[0].properties.full_id;
+        map.setFilter('ladoga-park-highlight', ['==', ['get', 'full_id'], fid]);
+      });
+      map.on('mouseleave', 'ladoga-park-fill', () => {
+        map.setFilter('ladoga-park-highlight', ['==', ['get', 'full_id'], '']);
+      });
+      map.on('click', 'ladoga-park-fill', (e) => {
+        const coordinates = e.lngLat;
+        const title = e.features[0].properties.name || 'Ладожский парк';
+      
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(`<strong>${title}</strong>`)
+          .addTo(map);
+      });
+         
+    })
+    .catch(err => console.error('Ошибка загрузки GeoJSON:', err));
+});
 
 // (необязательно) навигационные контролы
 map.addControl(new mapboxgl.NavigationControl(), 'top-right');
