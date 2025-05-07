@@ -10,7 +10,9 @@ document.querySelector('.point').addEventListener('click', () => {
     const legend = document.getElementById('legend-panel');
     legend.classList.toggle('active');
   });
-  
+
+const allMarkers = [];
+
 fetch('markers.json?' + Date.now())
   .then(res => {
     if (!res.ok) throw new Error(res.status);
@@ -26,10 +28,11 @@ fetch('markers.json?' + Date.now())
       el.style.backgroundImage = `url(${m.image})`;
       el.style.backgroundSize  = 'contain';
 
-      new mapboxgl.Marker(el)
+      const marker = new mapboxgl.Marker(el)
         .setLngLat(m.coordinates)
         .addTo(map);
-      
+
+        allMarkers.push({ marker, id: m.id });
 
 
         el.addEventListener('mouseenter', () => {
@@ -89,6 +92,27 @@ fetch('markers.json?' + Date.now())
         }, 300); // совпадает с длительностью transition
       });
           
+    });
+    const checkboxes = document.querySelectorAll('.legend-panel input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        // Получаем id из чекбокса по соответствию текста или data-атрибуту
+        // Лучше для чекбоксов добавить data-id, например:
+        // <input type="checkbox" checked data-id="blue">
+        
+        const checkedIds = Array.from(checkboxes)
+          .filter(ch => ch.checked)
+          .map(ch => ch.dataset.id);
+
+        // Показываем/скрываем маркеры
+        allMarkers.forEach(({ marker, id }) => {
+          if (checkedIds.includes(id)) {
+            marker.getElement().style.display = '';
+          } else {
+            marker.getElement().style.display = 'none';
+          }
+        });
+      });
     });
   })
   .catch(err => console.error(err));
