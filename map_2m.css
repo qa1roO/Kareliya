@@ -1,0 +1,257 @@
+/* Сброс */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+body{
+    font-family: Arial, sans-serif;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: blur(10px);
+    background: rgba(96, 103, 123, 0.8);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+  
+  /* Контейнер ссылок */
+.nav-content {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  
+  /* Кнопки */
+.nav-btn {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    padding: 1.125rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  /* Удаляем бордюры, используем индикатор-подчёркивание */
+.nav-btn::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: #FFB09F;
+    transition: width 0.3s, left 0.3s;
+}
+  
+  /* Hover-эффект: расширяем подчёркивание */
+.nav-btn:hover {
+    color: #FFB09F;
+}
+.nav-btn:hover::before {
+    width: 80%;
+    left: 10%;
+}
+  
+  /* Активная ссылка */
+.nav-btn.active {
+    color: #FFB09F;
+}
+.nav-btn.active::before {
+    width: 80%;
+    left: 10%;
+}
+  
+  /* Responsive: на узких экранах — центральная кнопка выпадает в «гамбургер» */
+@media (max-width: 768px) {
+    .nav-content {
+      overflow-x: auto;
+      padding: 0 1rem;
+    }
+    .nav-btn {
+      flex: 0 0 auto;
+    }
+}
+  
+  /* Контейнер двух колонок */
+.container {
+    margin: 58px 200px 0;
+    display: flex;
+    height: calc(100vh - /* высота вашей nav, например */ 60px);
+}
+  
+/* Левая колонка */
+.info {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    border-right: 1px solid #ddd;
+    /* чтобы .info__desc «забирал» всё оставшееся место */
+    flex: 1;
+}
+  /* Заголовки */
+.info__title {
+    font-size: 50px;
+    font-weight: bold;
+    color: #333;
+}
+.info__subtitle {
+    font-size: 30px;
+    color: #555;
+}
+  
+  /* Описание — растягивается и скроллится */
+  .info__desc {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #444;
+  }
+  
+
+  .description-images img {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  /* Блок картинок фиксированной «строчкой» */
+.info__images {
+    display: flex;
+    gap: 10px;
+}
+.info__images img {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+  
+
+.info__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.info__btn, .point{
+    background-color: #60677B;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.info__btn:hover, .point:hover{
+    background-color: #f96;
+} 
+.custom-marker {
+    transition: width 0.3s ease, height 0.3s ease;
+    width: 45px;
+    height: 45px;
+    background-size: contain;
+    border-radius: 50%; /* чтобы иконки были круглыми */
+    cursor: pointer;
+}
+
+.custom-marker:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+    border-radius: 50%; /* гарантируем, что тень будет с округлыми краями */
+    z-index: 1000; /* чтобы поверх других */
+}
+
+.description-images {
+  display: flex;
+  gap: 10px;
+  /* если нужно, чтобы картинки не «ползли» слишком вниз */
+  margin-bottom: 16px;
+}
+  /* Правая колонка — карта */
+.map-wrapper {
+    flex: 1; /* или любая пропорция */
+    position: relative;
+}
+
+.map-container{
+    background-color: black;
+}
+#map {
+    border-radius: 25px;
+    margin: 25px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* выдвижная панель */
+.legend-panel {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 280px;
+    max-height: 400px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-y: auto;
+    transform: translateX(110%); /* спрятан за правой границей */
+    transition: transform 0.3s ease;
+    font-family: Arial, sans-serif;
+    z-index: 1500;
+  }
+  
+  .legend-panel.active {
+    transform: translateX(0); /* выдвинут */
+  }
+  
+  .legend-panel h3 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
+  
+  .legend-panel h5 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .legend-panel form label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .legend-panel form input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  .checkbox-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    pointer-events: none; /* не мешает клику по label */
+  }

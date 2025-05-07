@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Интерактивная карта</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Mapbox GL CSS -->
+  <link
+    href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css"
+    rel="stylesheet"
+  >
+
+  <!-- Ваши стили -->
+  <link href="map_2m.css" rel="stylesheet">
+
+  <!-- Шрифт -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap"
+    rel="stylesheet"
+  >
+</head>
+<body>
+  <!-- Навигация -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="index.html" class="nav-btn">О КАРЕЛИИ</a>
+      <a href="map_2m.html" class="nav-btn active">КАРТА</a>
+      <a href="poi.html" class="nav-btn">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
+      <a href="#" class="nav-btn">МАРШРУТЫ</a>
+      <a href="#" class="nav-btn">СОБЫТИЯ</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="info">
+        <h1 class="info__title">Сортавальский район</h1>
+        <h2 class="info__subtitle" id="dynamic-title">
+          Рускеала
+        </h2>
+      
+        <div class="info__desc">
+          <p id="dynamic-description">
+            Добро пожаловать в Сортавальский район – удивительный край, где величественная природа Карелии встречается с богатой историей и культурой! Расположенный на берегу Ладожского озера, этот регион славится живописными ландшафтами, чистыми озерами, гранитными скалами и уникальными достопримечательностями.
+          </p>
+        </div>
+      
+        <!-- вот сюда ваш JS будет вставлять картинки -->
+        <div class="description-images">
+            <img src="images/ruskeala1.jpg" alt="Горный парк Рускеала">
+            <img src="images/passo.jpg" alt="Карельский зоопарк">
+
+        </div>
+        <div class="info__buttons">
+            <button class="info__btn" id="explore-btn">Исследовать</button>
+            <button class="point">Условные обозначения</button>
+        </div>
+          
+    </section>
+
+    <!-- Правая колонка с Mapbox -->
+    <section class="map-wrapper">
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </section>
+  </div>
+  <div id="legend-panel" class="legend-panel">
+    <h3>Условные обозначения</h3>
+    <h5>Достопримечательности</h5>
+    <form>
+    <label>
+        <input type="checkbox" checked>
+        <img src="images/legend/orange.png" class="checkbox-icon"> Памятники истории и культуры
+        </label>
+      <label>
+        <input type="checkbox" checked>
+        <img src="images/legend/blue.png" class="checkbox-icon"> Памятники природы
+      </label>
+      <label>
+        <input type="checkbox" checked>
+        <img src="images/legend/purple.png" class="checkbox-icon"> Природно культурные объекты
+      </label>
+      <label>
+        <input type="checkbox" checked>
+        <img src="images/legend/green.png" class="checkbox-icon"> Места отдыха и зеленые зоны
+      </label>
+      <label>
+        <input type="checkbox" checked>
+        <img src="icons/viewpoint.svg" class="checkbox-icon"> Смотровые площадки
+      </label>
+    </form>
+  </div>
+
+  <!-- Mapbox GL JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+  <!-- Ваш обновлённый скрипт -->
+  <script src="map_2m.js"></script>
+</body>
+</html>

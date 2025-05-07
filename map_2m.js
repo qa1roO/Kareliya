@@ -6,7 +6,11 @@ const map = new mapboxgl.Map({
     zoom: 8
 });
 
-
+document.querySelector('.point').addEventListener('click', () => {
+    const legend = document.getElementById('legend-panel');
+    legend.classList.toggle('active');
+  });
+  
 fetch('markers.json?' + Date.now())
   .then(res => {
     if (!res.ok) throw new Error(res.status);
@@ -21,11 +25,28 @@ fetch('markers.json?' + Date.now())
       el.style.height = '45px';
       el.style.backgroundImage = `url(${m.image})`;
       el.style.backgroundSize  = 'contain';
-      
-      const marker = new mapboxgl.Marker(el)
+
+      new mapboxgl.Marker(el)
         .setLngLat(m.coordinates)
         .addTo(map);
       
+
+
+        el.addEventListener('mouseenter', () => {
+            // Увеличиваем размер
+            el.style.width = '80px';
+            el.style.height = '80px';
+            el.style.zIndex = '1000'; // чтобы маркер был над другими
+            popup.setLngLat(m.coordinates).addTo(map);
+          });
+          
+          el.addEventListener('mouseleave', () => {
+            // Возвращаем исходный размер
+            el.style.width = '45px';
+            el.style.height = '45px';
+            el.style.zIndex = '';
+            popup.remove();
+          });
       // 2) готовим pop-up с title
       const popup = new mapboxgl.Popup({
         offset: 25,
@@ -134,5 +155,3 @@ map.on('load', () => {
     .catch(err => console.error('Ошибка загрузки GeoJSON:', err));
 });
 
-// (необязательно) навигационные контролы
-map.addControl(new mapboxgl.NavigationControl(), 'top-right');

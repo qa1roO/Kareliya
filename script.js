@@ -11,35 +11,36 @@ const map = new mapboxgl.Map({
 let pois = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1) Собираем массив районов, порядок соответствует порядку кнопок
-  const placeButtons = Array.from(document.querySelectorAll('.place-btn'));
-  pois = placeButtons.map(btn => {
-    const folder = btn.textContent.trim();
-    return {
-      title: folder,
-      images: [
-        `images/map/${folder}/1.jpg`,
-        `images/map/${folder}/2.jpg`,
-        `images/map/${folder}/3.jpg`
-      ]
-    };
-  });
-
-  // 2) Инициализируем карусель для первого района
-  initPoiCarousel(0);
-
-  // 3) Вешаем клики на кнопки, чтобы переключать район
-  placeButtons.forEach((btn, idx) => {
-    btn.addEventListener('click', () => {
-      // опционально: визуально выделяем активную кнопку
+  fetch('map_1_description.json')
+    .then(r => r.json())
+    .then(data => {
+      pois = data;
+      const placeButtons = Array.from(document.querySelectorAll('.place-btn'));
       placeButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
 
-      // И переключаем галерею на нужный район
-      initPoiCarousel(idx);
-    });
-  });
+      // 1) после того как data загружены – показываем стартовые фото для первого района
+      //    НО НЕ трогаем описание (updateDescription = false)
+      initPoiCarousel(0, false);
+
+      // 2) клики по кнопкам
+      placeButtons.forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+          placeButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const titleEl = document.querySelector('.poi-title');
+          titleEl.textContent = pois[idx].key;
+
+          // при клике меняем и фото, и описание (updateDescription = true)
+          initPoiCarousel(idx, true);
+        });
+      });
+    })
+    .catch(console.error);
 });
+
+
+
 const slides = [
   {
     src: 'images/gallery/wallpaper1.jpg',
@@ -47,15 +48,15 @@ const slides = [
   },
   {
     src: 'images/gallery/wallpaper2.jpg',
-    title: 'Лесная тропинка'
+    title: 'Водопад Ахвенкоски'
   },
   {
     src: 'images/gallery/wallpaper3.jpg',
-    title: 'Гранитные скалы'
+    title: 'Пяозеро'
   },
   {
-    src: 'images/gallery/train.jpg',
-    title: 'Трендовый ретро-поезд'
+    src: 'images/gallery/wallpaper4.jpg',
+    title: 'Кишский погост'
   }
 ];
 
@@ -189,39 +190,44 @@ const slides = [
   show(0);
 })();
 
-function initPoiCarousel(startIdx = 0) {
-  let poiIndex = startIdx;
+function initPoiCarousel(poiIndex, updateDescription = false) {
   let slideIndex = 0;
+  const imgEl  = document.querySelector('.poi-img');
+  const prev   = document.querySelector('.poi-nav--prev');
+  const next   = document.querySelector('.poi-nav--next');
+  const descEl = document.querySelector('.poi-desc');
 
-  const imgEl   = document.querySelector('.poi-img');
-  const prev    = document.querySelector('.poi-nav--prev');
-  const next    = document.querySelector('.poi-nav--next');
-  const descEl  = document.querySelector('.poi-desc'); // если есть
+  const poi = pois[poiIndex];
+  // вычисляем папку: слово до первого пробела
+  const folder = poi.key.split(' ')[0];
 
   function render() {
-    const poi = pois[poiIndex];
-    if (descEl) descEl.textContent = poi.description || '';
-
+    if (updateDescription) {
+      descEl.textContent = poi.description;
+    }
     imgEl.style.opacity = 0;
     setTimeout(() => {
-      imgEl.src = poi.images[slideIndex];
+      console.log('Trying to load:', folder, poi.images[slideIndex]);
+      imgEl.src = `images/map/${folder}/${poi.images[slideIndex]}`;
       imgEl.style.opacity = 1;
     }, 200);
   }
 
   prev.onclick = () => {
-    slideIndex = (slideIndex - 1 + pois[poiIndex].images.length) % pois[poiIndex].images.length;
+    slideIndex = (slideIndex - 1 + poi.images.length) % poi.images.length;
     render();
   };
   next.onclick = () => {
-    slideIndex = (slideIndex + 1) % pois[poiIndex].images.length;
+    slideIndex = (slideIndex + 1) % poi.images.length;
     render();
   };
 
-  // Сбрасываем на первую картинку при смене района
-  slideIndex = 0;
+  // показываем первый слайд
   render();
 }
+
+
+
 
 // map.scrollZoom.disable();      // прокрутка колёсиком
 // map.boxZoom.disable();         // зум рамкой
