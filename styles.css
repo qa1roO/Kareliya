@@ -10,7 +10,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 950px; /* Высота фона (подбирай под свою верстку) */
+    height: 100vh; /* Высота фона (подбирай под свою верстку) */
     background: url('images/starter.jpg') no-repeat center center fixed;
     background-size: cover;
     z-index: -1; /* Отправляем его на задний план */
