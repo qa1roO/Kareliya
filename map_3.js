@@ -6,7 +6,7 @@ const map = new mapboxgl.Map({
     zoom: 14.8
 });
 map.on('load', () => {
-    fetch('geojs/point_all.geojsonl.json')
+    fetch('geojs/point_all.geojsonl.json?nocache=' + Date.now())
     .then(res => res.text())
     .then(text => {
       const features = text

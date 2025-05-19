@@ -186,12 +186,7 @@
   align-items: center;
   cursor: pointer;
 }
-.checkbox-item img {
-  width: 20px;
-  height: 20px;
-  margin-right: 0.5rem;
-  flex-shrink: 0;
-}
+
 .checkbox-item span {
   font-size: 0.8rem;
 }
@@ -247,8 +242,8 @@
 /* Прямоугольные иконки в географическом разделе */
 .left-column-squared .checkbox-item img,
 .right-column-squared .checkbox-item img {
-  width: 43px;
-  height: 25px;
+  width: 40px;
+  height: 20px;
   object-fit: cover;
   border-radius: 0; /* убрать скругления, если были */
 }
