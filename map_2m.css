@@ -143,6 +143,7 @@ body{
 }
   
 .info__btn, .point{
+    text-decoration: none;
     background-color: #60677B;
     color: white;
     font-family: Arial, sans-serif;

@@ -106,8 +106,8 @@ body {
 
 /* Эффект при наведении */
 #id4:hover {
-    background: #60677B;
-    color: #F96D4E;
+    color: white;
+    background: #F96D4E;
 }
 /* Адаптивность */
 @media (max-width: 768px) {
@@ -492,23 +492,28 @@ body {
   .poi-nav--prev { left: 10px; }
   .poi-nav--next { right: 10px; }
 
-.poi-action-btn {
-    /* вместо margin: 8px 12px; */
-    margin: 8px auto;      /* вертикальный отступ 8px, по горизонтали — авто */
+.poi-action-link {
+    margin: 8px auto;
     padding: 6px 12px;
     font-size: 18px;
     font-weight: 600;
     background-color: #3a3e4a;
-    border: none;
     border-radius: 6px;
     color: #ffffff;
+    text-decoration: none;
     cursor: pointer;
     width: 40%;
-    display: block;        /* делаем кнопку блочной, чтобы margin:auto сработал корректно */
+    display: block;
+    text-align: center;
 }
+
   
-.poi-action-btn:hover {
+.poi-action-link:hover {
     background: #f96;
     color: white;
 }
   
+.poi-action-link.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}

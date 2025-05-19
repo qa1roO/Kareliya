@@ -63,10 +63,12 @@ fetch('markers.json?' + Date.now())
 
       // 4) click: меняем текст второго <p> на описание из JSON
       el.addEventListener('click', () => {
+        const hname = document.getElementById('dynamic-title');
         const descElem = document.getElementById('dynamic-description');
         const imagesContainer = document.querySelector('.description-images');
       
         // 1) Запускаем затухание
+        hname.classList.add('fade-out');
         descElem.classList.add('fade-out');
         imagesContainer.classList.add('fade-out');
       
@@ -74,6 +76,7 @@ fetch('markers.json?' + Date.now())
         setTimeout(() => {
           // Обновляем текст
           descElem.textContent = m.description;
+          hname.textContent = m.title;
       
           // Обновляем картинки
           imagesContainer.innerHTML = '';
@@ -87,6 +90,7 @@ fetch('markers.json?' + Date.now())
           }
       
           // Убираем класс fade-out → элементы плавно появятся
+          hname.classList.remove('fade-out');
           descElem.classList.remove('fade-out');
           imagesContainer.classList.remove('fade-out');
         }, 300); // совпадает с длительностью transition
@@ -134,8 +138,18 @@ map.on('load', () => {
         source: 'ladoga-park',
         layout: {},
         paint: {
-          'fill-color': '#088', // цвет полигона
-          'fill-opacity': 0.4
+          'fill-color': '#39a200', // цвет полигона
+          'fill-opacity': 0.3,
+        }
+      });
+      map.addLayer({
+        id: 'ladoga-park-outline',
+        type: 'line',
+        source: 'ladoga-park',
+        layout: {},
+        paint: {
+          'line-color': '#0b5c00', // цвет контура
+          'line-width': 1
         }
       });
 
@@ -144,8 +158,8 @@ map.on('load', () => {
         type: 'fill',
         source: 'ladoga-park',
         paint: {
-          'fill-color': '#0ff',
-          'fill-opacity': 0.6
+          'fill-color': '#CC0000',
+          'fill-opacity': 0.4
         },
         filter: ['==', ['get', 'full_id'], ''] // сначала вообще ничего показываем
       });

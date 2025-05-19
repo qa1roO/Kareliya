@@ -9,12 +9,18 @@ const map = new mapboxgl.Map({
 });
 
 let pois = [];
-
+let nameToPoiIndex = {};
+const actionLink = document.querySelector('.poi-action-link');
 document.addEventListener('DOMContentLoaded', () => {
   fetch('map_1_description.json')
     .then(r => r.json())
     .then(data => {
       pois = data;
+      pois.forEach((p, i) => {
+        // возьмём первое слово из ключа
+        const name0 = p.key.split(' ')[0];
+        nameToPoiIndex[name0] = i;
+      });
       const placeButtons = Array.from(document.querySelectorAll('.place-btn'));
       placeButtons.forEach(b => b.classList.remove('active'));
 
@@ -33,6 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // при клике меняем и фото, и описание (updateDescription = true)
           initPoiCarousel(idx, true);
+          const isSortavala = pois[idx].key.includes('Сортавальский');
+          if (isSortavala) {
+            actionLink.classList.remove('disabled');
+          } else {
+            actionLink.classList.add('disabled');
+          }
         });
       });
     })
@@ -61,37 +73,65 @@ const slides = [
 ];
 
 
-  map.on('load', () => {
-    // 1) добавляем источник
-    map.addSource('karelia', {
-      type: 'geojson',
-      data: 'geojs/bound_karelia_mo.geojson'
-    });
+map.on('load', () => {
   
-    // 2) создаём невидимый слой-заливку для отлова hover по карте
-    map.addLayer({
-      id:   'invisible-fill',
-      type: 'fill',
-      source: 'karelia',
-      paint: {
-        'fill-color': '#000',
-        'fill-opacity': 0
-      }
-    });
+  // 1) добавляем источник
+  map.addSource('karelia', {
+    type: 'geojson',
+    data: 'geojs/bound_karelia_mo.geojson'
+  });
   
-    // 3) слой подсветки (заполняется только когда фильтр подставлен)
-    map.addLayer({
-      id:   'highlight-fill',
-      type: 'fill',
-      source: 'karelia',
-      paint: {
-        'fill-color': '#f00',
-        'fill-opacity': 0.25
-      },
-      // по умолчанию ничего не показываем
-      filter: ['==', ['get','osm_id'], '']
-    });
+  // 2) создаём невидимый слой-заливку для отлова hover по карте
+  map.addLayer({
+    id:   'invisible-fill',
+    type: 'fill',
+    source: 'karelia',
+    paint: {
+      'fill-color': '#000',
+      'fill-opacity': 0
+    }
+  });
+
+  // 3) слой подсветки (заполняется только когда фильтр подставлен)
+  map.addLayer({
+    id:   'highlight-fill',
+    type: 'fill',
+    source: 'karelia',
+    paint: {
+      'fill-color': '#f00',
+      'fill-opacity': 0.25
+    },
+    // по умолчанию ничего не показываем
+    filter: ['==', ['get','osm_id'], '']
+  });
   
+
+  map.on('click', 'invisible-fill', e => {
+    if (!e.features.length) return;
+    // берём первое слово из свойства name
+    const featureName0 = e.features[0].properties.name.split(' ')[0];
+    const poiIndex     = nameToPoiIndex[featureName0];
+    if (poiIndex == null) return;  // нет подходящего ПОИ — выходим
+  
+    // переключаем кнопки
+    document.querySelectorAll('.place-btn').forEach((btn, idx) => {
+      btn.classList.toggle('active', idx === poiIndex);
+    });
+    // обновляем заголовок
+    document.querySelector('.poi-title').textContent = pois[poiIndex].key;
+    // обновляем карусель и описание
+    initPoiCarousel(poiIndex, true);
+    const isSortavala = pois[poiIndex].key.includes('Сортавальский');
+    if (isSortavala) {
+      actionLink.classList.remove('disabled');
+    } else {
+      actionLink.classList.add('disabled');
+    }
+    // подсвечиваем полигон
+    const osmId = e.features[0].properties.osm_id;
+    map.setFilter('highlight-fill', ['==', ['get','osm_id'], osmId]);
+  });
+
     // 4) hover на сам полигон (invisible-fill)
   map.on('mousemove', 'invisible-fill', e => {
     if (!e.features.length) return;
@@ -103,6 +143,8 @@ const slides = [
   map.on('mouseleave', 'invisible-fill', () => {
     map.setFilter('highlight-fill', ['==', ['get','osm_id'], '']);
   });
+
+  
 
   // 5) вручную навесим hover на кнопки
   fetch('geojs/bound_karelia_mo.geojson')
@@ -116,6 +158,19 @@ const slides = [
         const key = f.properties.name.split(' ')[0];
         nameToId[key] = f.properties.osm_id;
       });
+      const sortavId = nameToId['Сортавальский'];
+      if (sortavId != null) {
+        map.addLayer({
+          id:   'sortav-border',
+          type: 'line',
+          source: 'karelia',
+          paint: {
+            'line-color': '#00f',
+            'line-width': 1
+          },
+          filter: ['==', ['get','osm_id'], sortavId]
+        });
+      }
 
       // навешиваем на кнопки и заполняем idToButton
       document.querySelectorAll('.place-btn').forEach(btn => {
@@ -131,6 +186,7 @@ const slides = [
           map.setFilter('highlight-fill', ['==', ['get','osm_id'], '']);
         });
       });
+      
 
       // теперь – hover по карте
       let prevId = null;
@@ -152,6 +208,7 @@ const slides = [
           prevId = oid;
         }
       });
+      
 
       map.on('mouseleave', 'invisible-fill', () => {
         map.setFilter('highlight-fill', ['==', ['get','osm_id'], '']);
@@ -226,6 +283,12 @@ function initPoiCarousel(poiIndex, updateDescription = false) {
   render();
 }
 
+document.getElementById('id4').addEventListener('click', () => {
+  window.scrollTo({
+    top: document.documentElement.scrollHeight, // полная высота страницы
+    behavior: 'smooth'                          // плавный скролл
+  });
+});
 
 
 

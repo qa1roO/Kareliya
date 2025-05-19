@@ -1,0 +1,274 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: blur(10px);
+    background: rgba(96, 103, 123, 0.8);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+  
+  /* Контейнер ссылок */
+  .nav-content {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Кнопки */
+  .nav-btn {
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    padding: 1.125rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  /* Удаляем бордюры, используем индикатор-подчёркивание */
+  .nav-btn::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: #FFB09F;
+    transition: width 0.3s, left 0.3s;
+  }
+  
+  /* Hover-эффект: расширяем подчёркивание */
+  .nav-btn:hover {
+    color: #FFB09F;
+  }
+  .nav-btn:hover::before {
+    width: 80%;
+    left: 10%;
+  }
+  
+  /* Активная ссылка */
+  .nav-btn.active {
+    color: #FFB09F;
+  }
+  .nav-btn.active::before {
+    width: 80%;
+    left: 10%;
+  }
+  
+  /* Responsive: на узких экранах — центральная кнопка выпадает в «гамбургер» */
+  @media (max-width: 768px) {
+    .nav-content {
+      overflow-x: auto;
+      padding: 0 1rem;
+    }
+    .nav-btn {
+      flex: 0 0 auto;
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+body {
+    display: flex;
+    min-height: 100vh;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.events-section {
+  display: flex;
+  margin-top: 58px;              /* под навбар */
+  height: calc(100vh - 58px);
+  overflow: hidden;
+  width: 90%;
+}
+.events-calendar {
+    flex: 1;
+    display: flex;            /* превращаем в флекс-контейнер */
+    justify-content: center;  /* по горизонтали центр */
+    align-items: center;
+    height: 100%;             /* на всю высоту .events-section */
+    overflow: visible;    
+}
+.events-details {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  overflow-y: auto;
+}
+.events-main-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #FFB09F;
+}
+.events-subtitle {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.events-description {
+  flex: 1;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  font-size: 17px;
+}
+.event-images {
+  display: flex;
+  gap: 1rem;
+}
+.event-images img {
+  width: calc(50% - 0.5rem);
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.calendar-container {
+    background: #fff;  
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.calendar-container header {
+    display: flex;
+    align-items: center;
+    padding: 25px 30px 10px;
+    justify-content: space-between;
+}
+
+header .calendar-navigation {
+    display: flex;
+}
+
+header .calendar-navigation span {
+    height: 38px;
+    width: 38px;
+    margin: 0 1px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+    user-select: none;
+    color: #aeabab;
+    font-size: 1.9rem;
+}
+
+.calendar-navigation span:last-child {
+    margin-right: -10px;
+}
+
+header .calendar-navigation span:hover {
+    background: #f2f2f2;
+}
+
+header .calendar-current-date {
+    font-weight: 500;
+    font-size: 1.45rem;
+}
+
+.calendar-body {
+    padding: 20px;
+}
+
+.calendar-body ul {
+    list-style: none;
+    flex-wrap: wrap;
+    display: flex;
+    text-align: center;
+}
+
+.calendar-body .calendar-dates {
+    margin-bottom: 20px;
+}
+
+.calendar-body li {
+    width: calc(100% / 7);
+    font-size: 1.07rem;
+    color: #414141;
+}
+
+.calendar-body .calendar-weekdays li {
+    cursor: default;
+    font-weight: 500;
+}
+
+.calendar-body .calendar-dates li {
+    margin-top: 30px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.calendar-dates li.inactive {
+    color: #aaa;
+}
+
+.calendar-dates li.active {
+    color: #fff;
+}
+
+.calendar-dates li::before {
+    position: absolute;
+    content: "";
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.calendar-dates li.active::before {
+    background: #6332c5;
+}
+
+.calendar-dates li:not(.active):hover::before {
+    background: #e4e1e1;
+}
+
+
+/* Круглая подсветка событий */
+.calendar-dates li.has-event::before {
+  background: #FFEB3B;      /* желтый круг */
+  width: 2rem;              /* размер круга */
+  height: 2rem;
+  border-radius: 50%;
+  transform: translate(-50%, -50%); /* центрируем псевдоэлемент */
+}
+
+/* Чтобы цифра события была читаема */
+.calendar-dates li.has-event {
+  color: #000;              /* цвет текста внутри круга */
+}
+
+/* Опционально: эффект при наведении */
+.calendar-dates li.has-event:hover::before {
+  background: #FDD835;
+}

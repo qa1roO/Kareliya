@@ -1,0 +1,1 @@
+{ "type": "Feature", "properties": { "id": 1, "name": "Место сбора экскурсионных групп", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5765762, 61.9473503 ] } }

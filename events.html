@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Интерактивная карта</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Mapbox GL CSS -->
+  <link
+    href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css"
+    rel="stylesheet"
+  >
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
+
+  <!-- Ваши стили -->
+  <link href="events.css" rel="stylesheet">
+
+  <!-- Шрифт -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap"
+    rel="stylesheet"
+  >
+</head>
+<body>
+  <!-- Навигация -->
+  <nav class="navbar">
+    <div class="nav-content">
+        <a href="index.html" class="nav-btn">О КАРЕЛИИ</a>
+        <a href="map_2m.html" class="nav-btn">КАРТА</a>
+        <a href="poi.html" class="nav-btn">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
+        <a href="#" class="nav-btn">МАРШРУТЫ</a>
+        <a href="events.html" class="nav-btn active">СОБЫТИЯ</a>
+        </div>
+    </nav>
+  <section class="events-section">
+    <!-- Левая колонка: календарь -->
+    <div class="events-calendar">
+      <div class="calendar-container">
+        <header class="calendar-header">
+          <p class="calendar-current-date"></p>
+          <div class="calendar-navigation">
+            <span id="calendar-prev" class="material-symbols-rounded">chevron_left</span>
+            <span id="calendar-next" class="material-symbols-rounded">chevron_right</span>
+          </div>
+        </header>
+        <div class="calendar-body">
+          <ul class="calendar-weekdays">
+            <li>Sun</li><li>Mon</li><li>Tue</li>
+            <li>Wed</li><li>Thu</li><li>Fri</li><li>Sat</li>
+          </ul>
+          <ul class="calendar-dates"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Правая колонка: описание и картинки -->
+    <div class="events-details">
+    <!-- 1) Статичный заголовок -->
+    <h2 class="events-main-title">Праздники и события</h2>
+
+    <!-- 2) Динамические подзаголовок и описание -->
+    <h3 id="event-subtitle" class="events-subtitle">Выберите дату</h3>
+    <p id="event-description" class="events-description">
+        Здесь будет описание события.
+    </p>
+
+    <!-- 3) Блок с картинками -->
+    <div class="event-images">
+        <img id="event-img1" src="images/events/winter1.jpg" alt="Изображение события 1" />
+        <img id="event-img2" src="images/events/zoo2.jpg" alt="Изображение события 2" />
+    </div>
+    </div>
+
+  </section>
+
+  <script src="events.js"></script>
+</body>
+</html>

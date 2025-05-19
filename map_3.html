@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Горный парк Рускеала</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Mapbox GL CSS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+
+  <!-- Ваши стили -->
+  <link href="map_3.css" rel="stylesheet">
+
+  <!-- Шрифт Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Навигация -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="index.html" class="nav-btn">О КАРЕЛИИ</a>
+      <a href="map_2m.html" class="nav-btn">КАРТА</a>
+      <a href="poi.html" class="nav-btn">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
+      <a href="#" class="nav-btn">МАРШРУТЫ</a>
+      <a href="events.html" class="nav-btn">СОБЫТИЯ</a>
+    </div>
+  </nav>
+
+  <!-- Заголовок страницы -->
+
+  <section class="map-wrapper">
+    <div id="map"></div>
+    
+  
+<div class="overlay overlay-text">
+  <h1 class="capitalize">Условные обозначения</h1>
+  <h2 class ="subtitle">Маршруты</h2>
+  <h4 class = "unique">Надземные маршруты</h4>
+  <div class="route-columns">
+    <div class="route-col">
+      <div class="checkbox-item">
+        <input type="checkbox" id="ground1">
+        <label for="ground1">
+          <img src="images/Icons_map3/r1.png" alt="">
+          <span>Маршрут №1</span>
+        </label>
+      </div>
+    </div>
+    <div class="route-col">
+      <div class="checkbox-item">
+        <input type="checkbox" id="ground2">
+        <label for="ground2">
+          <img src="images/Icons_map3/r2.png" alt="">
+          <span>Маршрут №2</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <h4 class="unique">Подземные маршруты</h4>
+  <div class="route-columns">
+    <div class="route-col">
+      <div class="checkbox-item">
+        <input type="checkbox" id="underground1">
+        <label for="underground1">
+          <img src="images/Icons_map3/r5.png" alt="">
+          <span>Пещерный маршрут</span>
+        </label>
+      </div>
+    </div>
+    <!-- пустая вторая колонка для выравнивания -->
+    <div class="route-col"></div>
+  </div>
+  <h2 class ="subtitle">Туристская инфраструктура</h2>
+  <div class="columns">
+    <!-- Левая колонка -->
+    <div class="column left-column">
+      <h4>Экскурсионная инфраструктура</h4>
+      <div class="checkbox-list">
+        <!-- 4 чекбокса -->
+        <div class="checkbox-item">
+          <input type="checkbox" id="exc1">
+          <label for="exc1"><img src="images/Icons_map3/r1.png" alt=""><span>Вход в парк</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="exc2">
+          <label for="exc2"><img src="images/Icons_map3/r2.png" alt=""><span>Вход в пещеру</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="exc3">
+          <label for="exc3"><img src="images/Icons_map3/r3.png" alt=""><span>Смотровая площадка</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="exc4">
+          <label for="exc4"><img src="images/Icons_map3/r4.png" alt=""><span>Место сбора экскурсионных групп</span></label>
+        </div>
+      </div>
+
+      <h4>Развлечения</h4>
+      <div class="checkbox-list">
+        <!-- 6 чекбоксов -->
+        <div class="checkbox-item">
+          <input type="checkbox" id="ent1">
+          <label for="ent1"><img src="images/Icons_map3/v1.png" alt=""><span>Прокат SUP-бордов</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="ent2">
+          <label for="ent2"><img src="images/Icons_map3/v2.png" alt=""><span>Тарзанка</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="ent3">
+          <label for="ent3"><img src="images/Icons_map3/v3.png" alt=""><span>Экскурсии на квадроциклах</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="ent4">
+          <label for="ent4"><img src="images/Icons_map3/v4.png" alt=""><span>Дайвинг</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="ent5">
+          <label for="ent5"><img src="images/Icons_map3/v5.png" alt=""><span>Водная прогулка</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="ent6">
+          <label for="ent6"><img src="images/Icons_map3/v6.png" alt=""><span>Детская площадка</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="ent6">
+          <label for="ent6"><img src="images/Icons_map3/v6.png" alt=""><span>Зиплайн</span></label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Правая колонка -->
+    <div class="column right-column">
+      <h4>Социальная инфраструктура</h4>
+      <div class="checkbox-list">
+        <!-- 7 чекбоксов -->
+        <div class="checkbox-item">
+          <input type="checkbox" id="soc1">
+          <label for="soc1"><img src="images/Icons_map3/g1.png" alt=""><span>Туалет</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="soc2">
+          <label for="soc2"><img src="images/Icons_map3/g2.png" alt=""><span>Касса</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="soc3">
+          <label for="soc3"><img src="images/Icons_map3/g3.png" alt=""><span>Трансфер</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="soc4">
+          <label for="soc4"><img src="images/Icons_map3/g4.png" alt=""><span>Железнодорожная станция</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="soc5">
+          <label for="soc5"><img src="images/Icons_map3/g5.png" alt=""><span>Медицинский пункт</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="soc6">
+          <label for="soc6"><img src="images/Icons_map3/g6.png" alt=""><span>Камера хранения</span></label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="soc7">
+          <label for="soc7"><img src="images/Icons_map3/g7.png" alt=""><span>Сувениры</span></label>
+        </div>
+      </div>
+
+      <h4>Размещение и проживание</h4>
+      <div class="checkbox-list">
+        <!-- 1 чекбокс -->
+        <div class="checkbox-item">
+          <input type="checkbox" id="stay1">
+          <label for="stay1"><img src="images/Icons_map3/b1.png" alt=""><span>Отель</span></label>
+        </div>
+      </div>
+      <h4>Питание и рестораны</h4>
+      <div class="checkbox-list">
+        <!-- 1 чекбокс -->
+        <div class="checkbox-item">
+          <input type="checkbox" id="food1">
+          <label for="food1"><img src="images/Icons_map3/o1.png" alt=""><span>Кафе и рестораны</span></label>
+        </div>
+      </div>
+      <h4>Информация</h4>
+      <div class="checkbox-list">
+        <!-- 1 чекбокс -->
+        <div class="checkbox-item">
+          <input type="checkbox" id="info1">
+          <label for="info1"><img src="images/Icons_map3/br.png" alt=""><span>Информационные центры</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class ="subtitle">Общегеографическая основа</h2>
+  <h3>Надземная часть горного парка "Рускеала"</h3>
+  <div class="columns">
+    <!-- Левая колонка географии -->
+    <div class="column left-column-squared">
+      <h4>Растительный покров</h4>
+      <div class="checkbox-list">
+        <div class="checkbox-item">
+          <label for="geo1">
+            <img src="images/Icons_map3/RTU-07.png" alt="">
+            <span>Травянистая растительность</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo2">
+            <img src="images/Icons_map3/RTU-08.png" alt="">
+            <span>Древесная растительность</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo3">
+            <img src="images/Icons_map3/RTU-09.png" alt="">
+            <span>Территории без растительности</span>
+          </label>
+        </div>
+      </div>
+
+      <h4>Гидрография</h4>
+      <div class="checkbox-list">
+        <div class="checkbox-item">
+          <label for="geo4">
+            <img src="images/Icons_map3/RTU-10.png" alt="">
+            <span>Озера</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Правая колонка географии -->
+    <div class="column right-column-squared">
+      <h4>Дорожная сеть</h4>
+      <div class="checkbox-list">
+        <div class="checkbox-item">
+          <label for="geo5">
+            <img src="images/Icons_map3/RTU-15.png" alt="">
+            <span>Железная дорога</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo6">
+            <img src="images/Icons_map3/RTU-16.png" alt="">
+            <span>Автомобильная дорога</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo7">
+            <img src="images/Icons_map3/RTU-17.png" alt="">
+            <span>Пешеходные дорожки</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo8">
+            <img src="images/Icons_map3/RTU-18.png" alt="">
+            <span>Дорожки с деревянным покрытием</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo9">
+            <img src="images/Icons_map3/RTU-19.png" alt="">
+            <span>Парковки</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Подземная часть горного парка "Рускеала"</h3>
+  <div class="columns">
+    <!-- Левая колонка подземелья -->
+    <div class="column left-column-squared">
+      <h4>Подземные сооружения</h4>
+      <div class="checkbox-list">
+        <div class="checkbox-item">
+          <label for="geo10">
+            <img src="images/Icons_map3/RTU-11.png" alt="">
+            <span>Шахты, штольни</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo11">
+            <img src="images/Icons_map3/RTU-12.png" alt="">
+            <span>Мраморные колонны</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo12">
+            <img src="images/Icons_map3/RTU-13.png" alt="">
+            <span>Гроты</span>
+          </label>
+        </div>
+      </div>
+
+      <h4>Гидрография</h4>
+      <div class="checkbox-list">
+        <div class="checkbox-item">
+          <label for="geo13">
+            <img src="images/Icons_map3/RTU-14.png" alt="">
+            <span>Подземное озеро</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Правая колонка подземелья -->
+    <div class="column right-column-squared">
+      <h4>Пути сообщения</h4>
+      <div class="checkbox-list">
+        <div class="checkbox-item">
+          <label for="geo14">
+            <img src="images/Icons_map3/RTU-20.png" alt="">
+            <span>Подземные пешие тропы</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo15">
+            <img src="images/Icons_map3/RTU-21.png" alt="">
+            <span>Наплавные платформы</span>
+          </label>
+        </div>
+        <div class="checkbox-item">
+          <label for="geo16">
+            <img src="images/Icons_map3/RTU-22.png" alt="">
+            <span>Мост</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    <!-- 3) Пустой сайдбар справа от карты -->
+  <div class="overlay overlay-sidebar" id="sidebar">
+    <h2 id="sidebar-title">Название</h2>
+    <p id="sidebar-description">Описание</p>
+    <img id="sidebar-image" src="" alt="Фото" style="max-width: 100%; border-radius: 8px;">
+  </div>
+  </section>
+
+  <!-- Mapbox GL JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+  <script src="map_3.js"></script>
+</body>
+</html>
