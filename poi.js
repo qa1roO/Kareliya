@@ -20,12 +20,9 @@ document.querySelectorAll('.place-btn').forEach(btn => {
 // 3) Функция отрисовки
 function renderPois(region) {
   const container = document.getElementById('poi-list');
-  container.innerHTML = ''; // чистим предыдущий список
+  container.innerHTML = '';
 
-  // Если в JSON будут регионы, фильтруйте по ним. 
-  // Пока JSON не содержит поля region, просто покажем все.
-  const list = allPois
-    .filter(poi => !poi.region || poi.region === region);
+  const list = allPois.filter(poi => !poi.region || poi.region === region);
 
   if (list.length === 0) {
     container.innerHTML = `<p>Для района «${region}» ничего не найдено.</p>`;
@@ -43,11 +40,40 @@ function renderPois(region) {
       <div class="poi-text">
         <h3>${poi.title}</h3>
         <p>${poi.description}</p>
+        <button class="more-btn">Узнать больше</button>
       </div>
     `;
+
+    item.querySelector('.more-btn').addEventListener('click', () => {
+      openModal(poi);
+    });
+
     container.appendChild(item);
   });
 }
+function openModal(poi) {
+  // базовые поля
+  document.getElementById('modal-title').textContent = poi.title;
+  document.getElementById('modal-description').textContent = poi.description;
+
+  // основное изображение
+  const img = document.getElementById('modal-image');
+  img.src = poi.image;
+  img.alt = poi.title;
+
+  // новые поля
+  document.getElementById('modal-location').textContent = poi.location || '—';
+  document.getElementById('modal-time').textContent     = poi.time     || '—';
+  document.getElementById('modal-cost').textContent     = poi.cost     || '—';
+
+  // показать модалку
+  document.getElementById('modal').classList.remove('hidden');
+}
+
+
+document.querySelector('.close-btn').addEventListener('click', () => {
+  document.getElementById('modal').classList.add('hidden');
+});
 
 // 4) По-умолчанию можно отрисовать первый регион:
 window.addEventListener('load', () => {

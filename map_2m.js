@@ -5,6 +5,11 @@ const map = new mapboxgl.Map({
     center: [30.587858, 61.775442],
     zoom: 8
 });
+const exploreBtn   = document.getElementById('explore-btn');
+const originalHref = exploreBtn.getAttribute('href');
+// Сразу делаем её неактивной
+exploreBtn.classList.add('disabled');
+exploreBtn.removeAttribute('href');
 
 document.querySelector('.point').addEventListener('click', () => {
     const legend = document.getElementById('legend-panel');
@@ -63,38 +68,42 @@ fetch('markers.json?' + Date.now())
 
       // 4) click: меняем текст второго <p> на описание из JSON
       el.addEventListener('click', () => {
-        const hname = document.getElementById('dynamic-title');
-        const descElem = document.getElementById('dynamic-description');
-        const imagesContainer = document.querySelector('.description-images');
-      
-        // 1) Запускаем затухание
-        hname.classList.add('fade-out');
-        descElem.classList.add('fade-out');
-        imagesContainer.classList.add('fade-out');
-      
-        // 2) Когда затухание закончится (300ms), меняем контент и «выводим»
-        setTimeout(() => {
-          // Обновляем текст
-          descElem.textContent = m.description;
-          hname.textContent = m.title;
-      
-          // Обновляем картинки
-          imagesContainer.innerHTML = '';
-          if (Array.isArray(m.images)) {
-            m.images.forEach(src => {
-              const img = document.createElement('img');
-              img.src = src;
-              img.alt = m.title;
-              imagesContainer.appendChild(img);
-            });
-          }
-      
-          // Убираем класс fade-out → элементы плавно появятся
-          hname.classList.remove('fade-out');
-          descElem.classList.remove('fade-out');
-          imagesContainer.classList.remove('fade-out');
-        }, 300); // совпадает с длительностью transition
-      });
+      // 0) включаем или выключаем кнопку
+      if (m.id === 'purple') {
+        exploreBtn.classList.remove('disabled');
+        exploreBtn.setAttribute('href', originalHref);
+      } else {
+        exploreBtn.classList.add('disabled');
+        exploreBtn.removeAttribute('href');
+      }
+
+      // 1) ваша логика обновления заголовка/описания/картинок
+      const hname = document.getElementById('dynamic-title');
+      const descElem = document.getElementById('dynamic-description');
+      const imagesContainer = document.querySelector('.description-images');
+
+      hname.classList.add('fade-out');
+      descElem.classList.add('fade-out');
+      imagesContainer.classList.add('fade-out');
+
+      setTimeout(() => {
+        hname.textContent = m.title;
+        descElem.textContent = m.description;
+        imagesContainer.innerHTML = '';
+        if (Array.isArray(m.images)) {
+          m.images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = m.title;
+            imagesContainer.appendChild(img);
+          });
+        }
+        hname.classList.remove('fade-out');
+        descElem.classList.remove('fade-out');
+        imagesContainer.classList.remove('fade-out');
+      }, 300);
+});
+
           
     });
     const checkboxes = document.querySelectorAll('.legend-panel input[type="checkbox"]');
@@ -121,6 +130,7 @@ fetch('markers.json?' + Date.now())
   })
   .catch(err => console.error(err));
 // Загружаем GeoJSON-полигон
+
 map.on('load', () => {
   fetch('geojs/LADOGA_PARK.geojson?' + Date.now())
     .then(res => res.json())
@@ -191,5 +201,5 @@ map.on('load', () => {
          
     })
     .catch(err => console.error('Ошибка загрузки GeoJSON:', err));
+    
 });
-

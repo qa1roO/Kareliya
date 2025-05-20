@@ -179,3 +179,96 @@ html, body {
   border-radius: 8px;
   object-fit: cover;
 }
+/* контейнер модалки поверх всего */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* скрываем при наличии .hidden */
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 1200px;
+  width: 95%;
+  position: relative;
+}
+
+.modal-grid {
+  display: flex;
+  flex-direction: row-reverse; /* переворачиваем порядок колонок */
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+
+.modal-left,
+.modal-right {
+  flex: 1;
+}
+#modal-title{
+  color: #60677B;
+  font-size: 32px;
+}
+
+/* Левая колонка — квадратное изображение */
+.modal-left img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Правая колонка */
+.modal-right h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.modal-details {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.modal-details li {
+  margin-bottom: 0.5rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.more-btn {
+  color: #F96;  /* фон нужного цвета */
+  background-color: white;               /* цвет текста (или любой другой контрастный) */
+  border: none;               /* убираем рамку */
+  padding: 0;         /* отступы по вкусу */
+  cursor: pointer;            /* курсор при наведении */
+  font-weight: 600;           /* чуть более жирный шрифт, по желанию */
+  font-size: 1rem;            /* размер текста */
+  line-height: 1;             /* чтобы текст не смещался */
+  /* больше ничего не рисуем — будет виден только текст на цветном фоне */
+}
+.more-btn:focus {
+  outline: none;              /* убираем обводку при клике, если не нужна */
+}
+.more-btn:hover {
+  opacity: 0.9;               /* лёгкий эффект при наведении */
+}

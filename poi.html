@@ -18,7 +18,6 @@
             <a href="index.html" class="nav-btn" id="id1">О КАРЕЛИИ</a>
             <a href="map_2m.html" class="nav-btn">КАРТА</a>
             <a href="poi.html" class="nav-btn active">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
-            <a href="#" class="nav-btn">МАРШРУТЫ</a>
             <a href="events.html" class="nav-btn">СОБЫТИЯ</a>
         </div>
     </nav>
@@ -56,6 +55,26 @@
         </div>
         
     </section>
-    <script src="poi.js"></script>
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div class="modal-grid">
+          <div class="modal-left">
+            <img id="modal-image" src="" alt="Фото места">
+          </div>
+          <div class="modal-right">
+            <h3 id="modal-title"></h3>
+            <p id="modal-description"></p>
+            <ul class="modal-details">
+              <li><strong>Местоположение:</strong> <span id="modal-location"></span></li>
+              <li><strong>Время работы:</strong> <span id="modal-time"></span></li>
+              <li><strong>Стоимость:</strong> <span id="modal-cost"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <script src="poi.js"></script>
 </body>
 </html>

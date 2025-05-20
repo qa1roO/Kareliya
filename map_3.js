@@ -5,6 +5,174 @@ const map = new mapboxgl.Map({
     center: [30.574000, 61.947680],
     zoom: 14.8
 });
+
+// 2. Переменные для второй
+let map1 = null;
+let map1Initialized = false;
+const initialView = { center: [30.574000, 61.947680], zoom: 14.8 };
+const targetView  = { center: [30.576357, 61.948215], zoom: 16.7 };
+// 3. Кнопка переключения
+document.getElementById('toggle-map-btn').addEventListener('click', () => {
+  const el0 = document.getElementById('map');
+  const el1 = document.getElementById('map1');
+  const showingMap0 = el0.style.display !== 'none';
+
+  if (showingMap0) {
+    el0.style.display = 'none';
+    el1.style.display = 'block';
+
+    if (!map1Initialized) {
+      map1 = new mapboxgl.Map({
+        container: 'map1',
+        style: 'mapbox://styles/rudyborman97/cmawderqw006101scdgm6hvxi',
+        center: initialView.center,
+        zoom: initialView.zoom
+      });
+      map1Initialized = true;
+
+      map1.on('load', () => {
+        map1.flyTo({
+          ...targetView,
+          speed: 0.5,
+          curve: 1.2,
+          essential: true
+        });
+        fetch('geojs/Poligon_under.geojsonl.json?nocache=' + Date.now())
+          .then(res => res.text())
+          .then(text => {
+          console.log('raw Poligon_under:', text);
+          const features = text.trim().split(/\r?\n/).map(l => JSON.parse(l));
+          const geojson = { type: 'FeatureCollection', features };
+
+          map1.addSource('under-source', {
+            type: 'geojson',
+            data: geojson,
+            generateId: true
+          });
+
+          map1.addLayer({ // прозрачный fill для событий hover
+            id: 'under-interaction',
+            type: 'fill',
+            source: 'under-source',
+            paint: { 'fill-opacity': 0 }
+          });
+
+          map1.addLayer({ // контур
+            id: 'under-outline',
+            type: 'line',
+            source: 'under-source',
+            paint: {
+              'line-color': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                '#FF0000',
+                '#FFD700'
+              ],
+              'line-width': 2,
+              'line-opacity':0.5
+            }
+          });
+
+          // hover‑состояние
+          let hoverId = null;
+          map1.on('mouseenter', 'under-interaction', e => {
+            map1.getCanvas().style.cursor = 'pointer';
+            const id = e.features[0].id;
+            if (hoverId !== null) {
+              map1.setFeatureState({ source: 'under-source', id: hoverId }, { hover: false });
+            }
+            hoverId = id;
+            map1.setFeatureState({ source: 'under-source', id }, { hover: true });
+          });
+          map1.on('mouseleave', 'under-interaction', () => {
+            map1.getCanvas().style.cursor = '';
+            if (hoverId !== null) {
+              map1.setFeatureState({ source: 'under-source', id: hoverId }, { hover: false });
+              hoverId = null;
+            }
+          });
+          map1.on('click', 'under-interaction', (e) => {
+            const props = e.features[0].properties;
+            console.log('props on click:', props);
+            // Если вы хотите открывать даже без description, уберите эту проверку:
+            if (!props.description || props.description.trim() === "") return;
+
+            // Логируем входные данные и итоговый путь
+            console.log('clicked poly id =', props.id);
+            console.log('  props.image =', JSON.stringify(props.image));
+            const imgName = props.image && props.image.trim() !== ""
+              ? props.image
+              : 'placeholder.jpg';
+            console.log('  loading image = images/map3_img/' + imgName);
+
+            // заполняем сайдбар
+            document.getElementById('sidebar-title').textContent       = props.name;
+            document.getElementById('sidebar-description').textContent = props.description;
+            document.getElementById('sidebar-image').src =
+              'images/map3_img/' + imgName;
+            document.getElementById('sidebar-image').alt = props.name || '';
+            document.getElementById('sidebar').classList.add('active');
+          });
+
+
+      // клик где угодно — если не на подземке, закрываем сайдбар
+      map1.on('click', (e) => {
+        const hits = map1.queryRenderedFeatures(e.point, { layers: ['under-interaction'] });
+        if (hits.length === 0) {
+          document.getElementById('sidebar').classList.remove('active');
+        }
+      });
+      const popupUnder = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false
+      });
+
+      // при движении мыши над under-interaction – показываем название
+      map1.on('mousemove', 'under-interaction', (e) => {
+      map1.getCanvas().style.cursor = 'pointer';
+      const props = e.features[0].properties;
+      const coords = e.lngLat;
+
+      // если description непустой — не показываем popup
+      if (props.description && props.description.trim() !== "") {
+        popupUnder.remove();
+        return;
+      }
+
+      // иначе показываем название
+      const name = props.name || 'Без названия';
+      popupUnder
+        .setLngLat(coords)
+        .setText(name)
+        .addTo(map1);
+    });
+
+      // когда уходим мышью с полигона – скрываем popup
+      map1.on('mouseleave', 'under-interaction', () => {
+        map1.getCanvas().style.cursor = '';
+        popupUnder.remove();
+      });
+      })
+      .catch(err => console.error('Не удалось загрузить Poligon_under:', err));
+      });
+      
+    } else {
+      // Сбрасываем мгновенно в начальное положение
+      map1.jumpTo(initialView);
+      // И сразу запускаем анимацию
+      map1.flyTo({
+        ...targetView,
+        speed: 0.5,
+        curve: 1.2,
+        essential: true
+      });
+    }
+
+  } else {
+    el1.style.display = 'none';
+    el0.style.display = 'block';
+  }
+});
 map.on('load', () => {
     fetch('geojs/point_all.geojsonl.json?nocache=' + Date.now())
     .then(res => res.text())
@@ -131,7 +299,7 @@ map.on('load', () => {
                 'line-color': [
                     'case',
                     ['boolean', ['feature-state', 'hover'], false],
-                    '#00FF00',
+                    '#FF0000',
                     '#FF4500'
                 ],
                 'line-width': 2,
@@ -171,7 +339,7 @@ map.on('load', () => {
             );
             hoveredFeatureId = null;
         }
-        });
+      });
     })
     .catch(err => console.error('Не удалось загрузить полигоны:', err));
 });

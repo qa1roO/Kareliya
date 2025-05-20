@@ -68,7 +68,7 @@ const slides = [
   },
   {
     src: 'images/gallery/wallpaper4.jpg',
-    title: 'Кишский погост'
+    title: 'Кижский погост'
   }
 ];
 
