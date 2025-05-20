@@ -1,7 +1,7 @@
 { "type": "Feature", "properties": { "id": "exc1", "image":"r1.png", "name": "Вход в парк", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5819939, 61.9488986 ] } }
 { "type": "Feature", "properties": { "id": "exc2", "image":"r2.png", "name": "Вход в пещеру", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5815871, 61.9485228 ] } }
 { "type": "Feature", "properties": { "id": "exc2", "image":"r2.png", "name": "Вход в пещеру", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5809229, 61.9481285 ] } }
-{ "type": "Feature", "properties": { "id": "exc2", "image":"r2.png", "name": "Вход в пещеру", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5764681, 61.9473095 ] } }
+{ "type": "Feature", "properties": { "id": "exc2", "image":"r2.png", "name": "Вход в пещеру", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.576646, 61.947349 ] } }
 { "type": "Feature", "properties": { "id": "exc3", "image":"r3.png", "name": "Смотровая площадка", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5805239, 61.9481643 ] } }
 { "type": "Feature", "properties": { "id": "exc3", "image":"r3.png", "name": "Смотровая площадка", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5789439, 61.9473164 ] } }
 { "type": "Feature", "properties": { "id": "exc3", "image":"r3.png", "name": "Смотровая площадка", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5789906, 61.946424 ] } }
@@ -23,7 +23,7 @@
 { "type": "Feature", "properties": { "id": "ent4", "image":"v4.png", "name": "Дайвинг", "type": "Развлекательная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5790798, 61.9451419 ] } }
 { "type": "Feature", "properties": { "id": "ent5", "image":"v5.png", "name": "Водная прогулка", "type": "Развлекательная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.580614, 61.9449268 ] } }
 { "type": "Feature", "properties": { "id": "ent6", "image":"v6.png", "name": "Детская площадка", "type": "Развлекательная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5796552, 61.9442685 ] } }
-{ "type": "Feature", "properties": { "id": "ent7", "image":"v7.png", "name": "Троллей", "type": "Развлекательная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.579280, 61.948461 ] } }
+{ "type": "Feature", "properties": { "id": "ent7", "image":"v7.png", "name": "Троллей", "type": "Развлекательная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.579506, 61.948495 ] } }
 { "type": "Feature", "properties": { "id": "stay1", "image":"b1.png", "name": "Отель \"Юлия\"", "type": "Размещение и проживание" }, "geometry": { "type": "Point", "coordinates": [ 30.5809405, 61.9438235 ] } }
 { "type": "Feature", "properties": { "id": "info1", "image":"br.png", "name": "Информационный центр", "type": "Информация" }, "geometry": { "type": "Point", "coordinates": [ 30.5813013, 61.9445796 ] } }
 { "type": "Feature", "properties": { "id": "soc1", "image":"g1.png", "name": "Туалет", "type": "Социальная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5728484, 61.9514191 ] } }
