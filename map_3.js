@@ -211,7 +211,8 @@ document.getElementById('toggle-map-btn').addEventListener('click', () => {
         paint: {
           'line-color': '#e22bcd',
           'line-width': 2,
-          'line-opacity': 0.9
+          'line-opacity': 0.9,
+          'line-dasharray':[2, 2]
         }
       });
 
