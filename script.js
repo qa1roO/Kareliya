@@ -11,6 +11,16 @@ const map = new mapboxgl.Map({
 let pois = [];
 let nameToPoiIndex = {};
 const actionLink = document.querySelector('.poi-action-link');
+const SORTAVALA_URL = 'map_2m.html';
+function updateActionLink(isEnabled) {
+  if (isEnabled) {
+    actionLink.classList.remove('disabled');
+    actionLink.setAttribute('href', SORTAVALA_URL);
+  } else {
+    actionLink.classList.add('disabled');
+    actionLink.removeAttribute('href');
+  }
+}
 document.addEventListener('DOMContentLoaded', () => {
   fetch('map_1_description.json')
     .then(r => r.json())
@@ -45,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             actionLink.classList.add('disabled');
           }
+          updateActionLink(isSortavala);
         });
       });
     })
@@ -130,6 +141,8 @@ map.on('load', () => {
     // подсвечиваем полигон
     const osmId = e.features[0].properties.osm_id;
     map.setFilter('highlight-fill', ['==', ['get','osm_id'], osmId]);
+    updateActionLink(isSortavala);
+    
   });
 
     // 4) hover на сам полигон (invisible-fill)
@@ -283,14 +296,25 @@ function initPoiCarousel(poiIndex, updateDescription = false) {
   render();
 }
 
-document.getElementById('id4').addEventListener('click', () => {
+function scrollToMap() {
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) return;
+  // вычисляем абсолютное смещение от начала страницы
+  const top = mapContainer.getBoundingClientRect().top + window.pageYOffset;
   window.scrollTo({
-    top: document.documentElement.scrollHeight, // полная высота страницы
-    behavior: 'smooth'                          // плавный скролл
+    top: top,
+    behavior: 'smooth'
   });
+}
+
+// кнопка «Исследовать»
+document.getElementById('id4').addEventListener('click', scrollToMap);
+
+// навигационный пункт «КАРТА»
+document.getElementById('id5').addEventListener('click', (e) => {
+  e.preventDefault();  // чтобы не перезагружать страницу
+  scrollToMap();
 });
-
-
 
 // map.scrollZoom.disable();      // прокрутка колёсиком
 // map.boxZoom.disable();         // зум рамкой

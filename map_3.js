@@ -5,6 +5,8 @@ const map = new mapboxgl.Map({
   center: [30.574000, 61.947680],
   zoom: 14.8
 });
+const undCheckbox = document.getElementById('underground1');
+if (undCheckbox) undCheckbox.checked = false;
 let map1 = null;
 let map1Initialized = false;
 const initialView = { center: [30.574000, 61.947680], zoom: 14.8 };
@@ -183,9 +185,7 @@ document.getElementById('toggle-map-btn').addEventListener('click', () => {
     el0.style.display = 'block';
     toggleBtn.textContent = 'Показать подземную Рускеалу';
   }
-  // перед созданием слоя маршрутов
-  const undCheckbox = document.getElementById('underground1');
-  if (undCheckbox) undCheckbox.checked = false;
+
   const visibleUndRouteIds = new Set();
   if (undCheckbox.checked) visibleUndRouteIds.add('underground1');
 
@@ -345,7 +345,7 @@ map.on('load', () => {
     })
     .catch(err => console.error(err));
 
-  fetch('geojs/Poligon_tem.geojsonl.json')
+  fetch('geojs/Poligon_tem.geojsonl.json?nocache='+Date.now())
     .then(res => res.text())
     .then(text => {
       const polyFeatures = text

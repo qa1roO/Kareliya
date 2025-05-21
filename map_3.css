@@ -254,7 +254,7 @@
   top: 5%;             /* отступ сверху */
   max-height: 90vh;    /* ограничение по высоте */
   width: 20%;
-  background: rgba(96, 103, 123, 0.8) !important;
+  background: #60677B !important;
   color: white;
   padding: 15px;
   transition: right 0.3s ease;

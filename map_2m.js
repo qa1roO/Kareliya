@@ -1,20 +1,20 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicnVkeWJvcm1hbjk3IiwiYSI6ImNsMWhvNWk1djBsaG8zZXF1cW94OWNldmsifQ.oW8liYyNZtsGmUO4irSwoA';
 const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/rudyborman97/cm8voxls800k701s9g4agaehk',
-    center: [30.587858, 61.775442],
-    zoom: 8
+  container: 'map',
+  style: 'mapbox://styles/rudyborman97/cm8voxls800k701s9g4agaehk',
+  center: [30.587858, 61.775442],
+  zoom: 8
 });
-const exploreBtn   = document.getElementById('explore-btn');
+const exploreBtn = document.getElementById('explore-btn');
 const originalHref = exploreBtn.getAttribute('href');
 // Сразу делаем её неактивной
 exploreBtn.classList.add('disabled');
 exploreBtn.removeAttribute('href');
 
 document.querySelector('.point').addEventListener('click', () => {
-    const legend = document.getElementById('legend-panel');
-    legend.classList.toggle('active');
-  });
+  const legend = document.getElementById('legend-panel');
+  legend.classList.toggle('active');
+});
 
 const allMarkers = [];
 
@@ -28,33 +28,33 @@ fetch('markers.json?' + Date.now())
       // 1) создаём DOM-элемент и маркер
       const el = document.createElement('div');
       el.className = 'custom-marker';
-      el.style.width  = '45px';
+      el.style.width = '45px';
       el.style.height = '45px';
       el.style.backgroundImage = `url(${m.image})`;
-      el.style.backgroundSize  = 'contain';
+      el.style.backgroundSize = 'contain';
 
       const marker = new mapboxgl.Marker(el)
         .setLngLat(m.coordinates)
         .addTo(map);
 
-        allMarkers.push({ marker, id: m.id });
+      allMarkers.push({ marker, id: m.id });
 
 
-        el.addEventListener('mouseenter', () => {
-            // Увеличиваем размер
-            el.style.width = '80px';
-            el.style.height = '80px';
-            el.style.zIndex = '1000'; // чтобы маркер был над другими
-            popup.setLngLat(m.coordinates).addTo(map);
-          });
-          
-          el.addEventListener('mouseleave', () => {
-            // Возвращаем исходный размер
-            el.style.width = '45px';
-            el.style.height = '45px';
-            el.style.zIndex = '';
-            popup.remove();
-          });
+      el.addEventListener('mouseenter', () => {
+        // Увеличиваем размер
+        el.style.width = '80px';
+        el.style.height = '80px';
+        el.style.zIndex = '1000'; // чтобы маркер был над другими
+        popup.setLngLat(m.coordinates).addTo(map);
+      });
+
+      el.addEventListener('mouseleave', () => {
+        // Возвращаем исходный размер
+        el.style.width = '45px';
+        el.style.height = '45px';
+        el.style.zIndex = '';
+        popup.remove();
+      });
       // 2) готовим pop-up с title
       const popup = new mapboxgl.Popup({
         offset: 25,
@@ -68,63 +68,63 @@ fetch('markers.json?' + Date.now())
 
       // 4) click: меняем текст второго <p> на описание из JSON
       el.addEventListener('click', () => {
-      // 0) включаем или выключаем кнопку
-      if (m.id === 'purple') {
-        exploreBtn.classList.remove('disabled');
-        exploreBtn.setAttribute('href', originalHref);
-      } else {
-        exploreBtn.classList.add('disabled');
-        exploreBtn.removeAttribute('href');
-      }
-
-      // 1) ваша логика обновления заголовка/описания/картинок
-      const hname = document.getElementById('dynamic-title');
-      const descElem = document.getElementById('dynamic-description');
-      const imagesContainer = document.querySelector('.description-images');
-
-      hname.classList.add('fade-out');
-      descElem.classList.add('fade-out');
-      imagesContainer.classList.add('fade-out');
-
-      setTimeout(() => {
-        hname.textContent = m.title;
-        descElem.textContent = m.description;
-        imagesContainer.innerHTML = '';
-        if (Array.isArray(m.images)) {
-          m.images.forEach(src => {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = m.title;
-            imagesContainer.appendChild(img);
-          });
+        // 0) включаем или выключаем кнопку
+        if (m.image === 'images/icons/Poi_ruskeala_B.png') {
+          exploreBtn.classList.remove('disabled');
+          exploreBtn.setAttribute('href', originalHref);
+        } else {
+          exploreBtn.classList.add('disabled');
+          exploreBtn.removeAttribute('href');
         }
-        hname.classList.remove('fade-out');
-        descElem.classList.remove('fade-out');
-        imagesContainer.classList.remove('fade-out');
-      }, 300);
-});
 
-          
+        // 1) ваша логика обновления заголовка/описания/картинок
+        const hname = document.getElementById('dynamic-title');
+        const descElem = document.getElementById('dynamic-description');
+        const imagesContainer = document.querySelector('.description-images');
+
+        hname.classList.add('fade-out');
+        descElem.classList.add('fade-out');
+        imagesContainer.classList.add('fade-out');
+
+        setTimeout(() => {
+          hname.textContent = m.title;
+          descElem.textContent = m.description;
+          imagesContainer.innerHTML = '';
+          if (Array.isArray(m.images)) {
+            m.images.forEach(src => {
+              const img = document.createElement('img');
+              img.src = src;
+              img.alt = m.title;
+              imagesContainer.appendChild(img);
+            });
+          }
+          hname.classList.remove('fade-out');
+          descElem.classList.remove('fade-out');
+          imagesContainer.classList.remove('fade-out');
+        }, 300);
+      });
+
+
     });
     const checkboxes = document.querySelectorAll('.legend-panel input[type="checkbox"]');
     checkboxes.forEach(cb => {
       cb.addEventListener('change', () => {
-        // Получаем id из чекбокса по соответствию текста или data-атрибуту
-        // Лучше для чекбоксов добавить data-id, например:
-        // <input type="checkbox" checked data-id="blue">
-        
         const checkedIds = Array.from(checkboxes)
           .filter(ch => ch.checked)
           .map(ch => ch.dataset.id);
 
         // Показываем/скрываем маркеры
         allMarkers.forEach(({ marker, id }) => {
-          if (checkedIds.includes(id)) {
-            marker.getElement().style.display = '';
-          } else {
-            marker.getElement().style.display = 'none';
-          }
+          marker.getElement().style.display = checkedIds.includes(id) ? '' : 'none';
         });
+
+        // Показываем/скрываем полигон по purple
+        const purpleCb = document.querySelector('input[data-id="purple"]');
+        if (purpleCb) {
+          const vis = purpleCb.checked ? 'visible' : 'none';
+          ['ladoga-park-fill', 'ladoga-park-outline', 'ladoga-park-highlight']
+            .forEach(layer => map.setLayoutProperty(layer, 'visibility', vis));
+        }
       });
     });
   })
@@ -192,14 +192,14 @@ map.on('load', () => {
       map.on('click', 'ladoga-park-fill', (e) => {
         const coordinates = e.lngLat;
         const title = e.features[0].properties.name || 'Ладожский парк';
-      
+
         new mapboxgl.Popup()
           .setLngLat(coordinates)
           .setHTML(`<strong>${title}</strong>`)
           .addTo(map);
       });
-         
+
     })
     .catch(err => console.error('Ошибка загрузки GeoJSON:', err));
-    
+
 });
