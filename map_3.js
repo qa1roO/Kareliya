@@ -167,6 +167,80 @@ document.getElementById('toggle-map-btn').addEventListener('click', () => {
             });
           })
           .catch(err => console.error('Не удалось загрузить Poligon_under:', err));
+
+        fetch('geojs/point_underground.geojsonl.json?nocache=' + Date.now())
+          .then(res => res.text())
+          .then(text => {
+            const features = text
+              .trim()
+              .split(/\r?\n/)
+              .filter(l => l)
+              .map(l => JSON.parse(l));
+
+            const markersById = {};
+
+            features.forEach(feat => {
+              const [lng, lat] = feat.geometry.coordinates;
+              const { id, name, image } = feat.properties;
+
+              // 1) Создаём контейнер без position:relative, фикс. размер
+              const container = document.createElement('div');
+              container.style.width = '24px';
+              container.style.height = '24px';
+              container.style.overflow = 'visible'; // чтобы img выходил за границы
+
+              // 2) Внутри — <img>, как на основной карте
+              const imgEl = document.createElement('img');
+              imgEl.src = `images/Icons_map3/${image}`;
+              imgEl.alt = name;
+              imgEl.style.width = '24px';
+              imgEl.style.height = '24px';
+              imgEl.style.objectFit = 'contain';
+              imgEl.style.cursor = 'pointer';
+              imgEl.style.transition = 'transform 0.2s ease';
+              imgEl.style.transformOrigin = 'center center';
+
+              // 3) Hover-эффект
+              imgEl.addEventListener('mouseenter', () => {
+                imgEl.style.transform = 'scale(2.5)';
+                container.style.zIndex = '1000';
+              });
+              imgEl.addEventListener('mouseleave', () => {
+                imgEl.style.transform = 'scale(1)';
+                container.style.zIndex = '';
+              });
+
+              container.appendChild(imgEl);
+
+              // 4) Собираем маркер с popup
+              const marker = new mapboxgl.Marker({
+                element: container,
+                anchor: 'center',
+                offset: [0, 0]
+              })
+                .setLngLat([lng, lat])
+                .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(name));
+
+              // 5) Группируем по id
+              if (!markersById[id]) markersById[id] = [];
+              markersById[id].push(marker);
+            });
+
+            // 6) Отрисовка и привязка к чекбоксам, как у вас уже есть
+            document.querySelectorAll('.checkbox-item input[type=checkbox]').forEach(cb => {
+              const fid = cb.id;
+              (markersById[fid] || []).forEach(marker => {
+                if (cb.checked) marker.addTo(map1);
+              });
+              cb.addEventListener('change', () => {
+                (markersById[fid] || []).forEach(marker => {
+                  cb.checked ? marker.addTo(map1) : marker.remove();
+                });
+              });
+            });
+          })
+          .catch(err => console.error(err));
+
       });
 
     } else {
@@ -212,7 +286,7 @@ document.getElementById('toggle-map-btn').addEventListener('click', () => {
           'line-color': '#e22bcd',
           'line-width': 2,
           'line-opacity': 0.9,
-          'line-dasharray':[2, 2]
+          'line-dasharray': [2, 2]
         }
       });
 
@@ -235,25 +309,7 @@ document.getElementById('toggle-map-btn').addEventListener('click', () => {
 function toggleMaps() {
   document.getElementById('toggle-map-btn').click();
 }
-const caveEntryCheckbox = document.getElementById('exc2');
-if (caveEntryCheckbox) {
-  caveEntryCheckbox.addEventListener('change', e => {
-    // Только на включение, а не на выключение
-    if (e.target.checked) {
-      toggleMaps();
-    }
-  });
-  // Лейбл тоже
-  const caveEntryLabel = document.querySelector('label[for="exc2"]');
-  if (caveEntryLabel) {
-    caveEntryLabel.addEventListener('click', () => {
-      // небольшая задержка, чтобы checkbox уже сменил своё checked
-      setTimeout(() => {
-        if (caveEntryCheckbox.checked) toggleMaps();
-      }, 0);
-    });
-  }
-}
+
 map.on('load', () => {
   map.on('click', (e) => {
     const hits = map.queryRenderedFeatures(e.point, { layers: ['polygons-interaction'] });
@@ -346,7 +402,7 @@ map.on('load', () => {
     })
     .catch(err => console.error(err));
 
-  fetch('geojs/Poligon_tem.geojsonl.json?nocache='+Date.now())
+  fetch('geojs/Poligon_tem.geojsonl.json?nocache=' + Date.now())
     .then(res => res.text())
     .then(text => {
       const polyFeatures = text
@@ -459,7 +515,7 @@ map.on('load', () => {
                 'ground2', '#1E4E9D',
                 '#AAAAAA'
               ],
-              'line-width': 1.5,
+              'line-width': 2,
               'line-opacity': 1,
               'line-dasharray': [
                 'case',

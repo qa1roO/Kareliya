@@ -1,1 +1,2 @@
-{ "type": "Feature", "properties": { "id": 1, "name": "Место сбора экскурсионных групп", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5765762, 61.9473503 ] } }
+{ "type": "Feature", "properties": { "id": "flag", "name": "Начало маршрута", "type": "Экскурсионная инфраструктура", "image":"G.png" }, "geometry": { "type": "Point", "coordinates": [ 30.5767734, 61.9474236 ] } }
+{ "type": "Feature", "properties": { "id": "exc4", "name": "Место сборка экскурсионных групп", "type": "Экскурсионная инфраструктура", "image":"r4.png" }, "geometry": { "type": "Point", "coordinates": [ 30.5766543, 61.9473555 ] } }

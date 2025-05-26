@@ -7,7 +7,6 @@ const map = new mapboxgl.Map({
 });
 const exploreBtn = document.getElementById('explore-btn');
 const originalHref = exploreBtn.getAttribute('href');
-// Сразу делаем её неактивной
 exploreBtn.classList.add('disabled');
 exploreBtn.removeAttribute('href');
 
@@ -41,15 +40,14 @@ fetch('markers.json?' + Date.now())
 
 
       el.addEventListener('mouseenter', () => {
-        // Увеличиваем размер
+  
         el.style.width = '80px';
         el.style.height = '80px';
-        el.style.zIndex = '1000'; // чтобы маркер был над другими
+        el.style.zIndex = '1000'; 
         popup.setLngLat(m.coordinates).addTo(map);
       });
 
       el.addEventListener('mouseleave', () => {
-        // Возвращаем исходный размер
         el.style.width = '45px';
         el.style.height = '45px';
         el.style.zIndex = '';
@@ -62,13 +60,10 @@ fetch('markers.json?' + Date.now())
         closeOnClick: false
       }).setText(m.title);
 
-      // 3) hover: показываем/скрываем pop-up
       el.addEventListener('mouseenter', () => popup.setLngLat(m.coordinates).addTo(map));
       el.addEventListener('mouseleave', () => popup.remove());
 
-      // 4) click: меняем текст второго <p> на описание из JSON
       el.addEventListener('click', () => {
-        // 0) включаем или выключаем кнопку
         if (m.image === 'images/icons/Poi_ruskeala_B.png') {
           exploreBtn.classList.remove('disabled');
           exploreBtn.setAttribute('href', originalHref);
@@ -77,7 +72,6 @@ fetch('markers.json?' + Date.now())
           exploreBtn.removeAttribute('href');
         }
 
-        // 1) ваша логика обновления заголовка/описания/картинок
         const hname = document.getElementById('dynamic-title');
         const descElem = document.getElementById('dynamic-description');
         const imagesContainer = document.querySelector('.description-images');
@@ -190,14 +184,49 @@ map.on('load', () => {
         map.setFilter('ladoga-park-highlight', ['==', ['get', 'full_id'], '']);
       });
       map.on('click', 'ladoga-park-fill', (e) => {
-        const coordinates = e.lngLat;
-        const title = e.features[0].properties.name || 'Ладожский парк';
+        const props = e.features[0].properties;
+        const title = props.name || 'Ладожский парк';
+        const description = props.description || 'Описание этого участка парка пока недоступно.';
+        let images = [];
+        try {
+          images = JSON.parse(props.images);
+        } catch (err) {
+        }
 
         new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setHTML(`<strong>${title}</strong>`)
+          .setLngLat(e.lngLat)
+          .setHTML(`<strong>${title}`)
           .addTo(map);
+
+        const exploreBtn = document.getElementById('explore-btn');
+        exploreBtn.classList.add('disabled');
+        exploreBtn.removeAttribute('href');
+
+        const hname = document.getElementById('dynamic-title');
+        const descElem = document.getElementById('dynamic-description');
+        const imagesContainer = document.querySelector('.description-images');
+
+        hname.classList.add('fade-out');
+        descElem.classList.add('fade-out');
+        imagesContainer.classList.add('fade-out');
+
+        setTimeout(() => {
+          hname.textContent = title;
+          descElem.textContent = description;
+          imagesContainer.innerHTML = '';
+          images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = title;
+            imagesContainer.appendChild(img);
+          });
+
+          hname.classList.remove('fade-out');
+          descElem.classList.remove('fade-out');
+          imagesContainer.classList.remove('fade-out');
+        }, 300);
       });
+
 
     })
     .catch(err => console.error('Ошибка загрузки GeoJSON:', err));

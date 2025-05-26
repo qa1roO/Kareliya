@@ -306,3 +306,9 @@
 #toggle-map-btn:hover {
   background: #f96;
 }
+
+#id6 {
+  display: flex;          
+  justify-content: center;  
+  margin: 0 auto 1rem;   
+}

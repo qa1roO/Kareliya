@@ -10,7 +10,7 @@
 { "type": "Feature", "properties": { "id": "exc3", "image":"r3.png", "name": "Смотровая площадка", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5806371, 61.9473774 ] } }
 { "type": "Feature", "properties": { "id": "exc3", "image":"r3.png", "name": "Смотровая площадка", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5782477, 61.9467107 ] } }
 { "type": "Feature", "properties": { "id": "exc3", "image":"r3.png", "name": "Смотровая площадка", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.569972, 61.9485099 ] } }
-{ "type": "Feature", "properties": { "id": "exc4", "image":"r4.png", "name": "Место сбора экскурсионных групп", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5811297, 61.9488715 ] } }
+{ "type": "Feature", "properties": { "id": "exc4", "image":"r4.png", "name": "Место сбора экскурсионных групп", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.581523, 61.948893 ] } }
 { "type": "Feature", "properties": { "id": "food1", "image":"o1.png", "name": "Кахвила", "type": "Питание" }, "geometry": { "type": "Point", "coordinates": [ 30.5826586, 61.9498339 ] } }
 { "type": "Feature", "properties": { "id": "food1", "image":"o1.png", "name": "Колмас Бургерс", "type": "Питание" }, "geometry": { "type": "Point", "coordinates": [ 30.5814703, 61.9444116 ] } }
 { "type": "Feature", "properties": { "id": "food1", "image":"o1.png", "name": "Лето", "type": "Питание" }, "geometry": { "type": "Point", "coordinates": [ 30.580759, 61.9445018 ] } }
@@ -40,3 +40,4 @@
 { "type": "Feature", "properties": { "id": "soc7", "image":"g7.png", "name": "Сувениры", "type": "Социальная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5816944, 61.9442469 ] } }
 { "type": "Feature", "properties": { "id": "soc7", "image":"g7.png", "name": "Сувениры", "type": "Социальная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5816642, 61.9458519 ] } }
 { "type": "Feature", "properties": { "id": "soc7", "image":"g7.png", "name": "Сувениры", "type": "Социальная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5819234, 61.94615 ] } }
+{ "type": "Feature", "properties": { "id": "flag", "image":"G.png", "name": "Начал маршрута", "type": "Экскурсионная инфраструктура" }, "geometry": { "type": "Point", "coordinates": [ 30.5811297, 61.9488715 ] } }
