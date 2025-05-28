@@ -4,8 +4,7 @@ const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/rudyborman97/cma12usrq00bi01qqbh5q1kpx',
   center: [33.245378488, 63.638475668],
-  zoom: 5.03,
-  interactive: false
+  zoom: 5.03
 });
 
 let pois = [];
